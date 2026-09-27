@@ -933,14 +933,14 @@ What the money buys: about 20 hours a week of a trained aide for three months (a
     if(!v||!v.ct){
       box.innerHTML='<div class="locked"><p><b>Nothing saved yet.</b> Choose a vault passphrase to start. Everyone who needs the details will use this same passphrase.</p><form id="vsetup"><input type="password" id="vpw1" placeholder="vault passphrase" autocomplete="new-password"><input type="password" id="vpw2" placeholder="again" autocomplete="new-password"><button class="btn" type="submit">Create vault</button><label class="chk"><input type="checkbox" id="vrem1"> Remember the passphrase on this phone</label><span class="err" id="verr"></span></form></div>';
       $('vsetup').addEventListener('submit',function(e){ e.preventDefault(); var a=$('vpw1').value, b=$('vpw2').value; if(a.length<6){ $('verr').textContent='Use at least 6 characters.'; return; } if(a!==b){ $('verr').textContent='The two entries differ.'; return; }
-        encrypt({},a).then(function(enc){ vaultPw=a; if($('vrem1').checked) lsSet(LS.vaultpw,a); vaultOpen={}; vaultSeen=enc.t; setField(['vault'],enc); vaultHtml(); }); });
+        encrypt({},a).then(function(enc){ vaultPw=a; if($('vrem1').checked) lsSet(LS.vaultpw,a); vaultOpen={}; vaultSeen=enc.t; vaultMode='open'; setField(['vault'],enc); vaultHtml(); }); });
       return;
     }
     if(vaultOpen===null){
       box.innerHTML='<div class="locked"><p><b>Locked.</b> Enter the vault passphrase to see or edit the details.</p><form id="vunlock"><input type="password" id="vpw" placeholder="vault passphrase" autocomplete="current-password"><button class="btn" type="submit">Unlock</button><label class="chk"><input type="checkbox" id="vrem"> Remember the passphrase on this phone</label><span class="err" id="verr"></span></form><p><small><a href="#" id="vreset">Lost the passphrase? Start the vault over</a> (erases the saved details for everyone).</small></p></div>';
-      $('vunlock').addEventListener('submit',function(e){ e.preventDefault(); var pw=$('vpw').value; decrypt(get(['vault']),pw).then(function(o){ vaultPw=pw; if($('vrem').checked) lsSet(LS.vaultpw,pw); vaultOpen=o; vaultSeen=get(['vault']).t; vaultHtml(); }).catch(function(){ $('verr').textContent='That passphrase did not open it.'; }); });
-      $('vreset').addEventListener('click',function(e){ e.preventDefault(); if(this.dataset.armed){ lsDel(LS.vaultpw); vaultPw=''; vaultOpen=null; setField(['vault'],{ct:null,iv:null,salt:null,t:Date.now()}); vaultHtml(); } else { this.dataset.armed='1'; this.textContent='Tap again to erase the vault for everyone'; } });
-      if(vaultPw){ decrypt(v,vaultPw).then(function(o){ vaultOpen=o; vaultSeen=v.t; vaultHtml(); }).catch(function(){ lsDel(LS.vaultpw); vaultPw=''; }); }
+      $('vunlock').addEventListener('submit',function(e){ e.preventDefault(); var pw=$('vpw').value; decrypt(get(['vault']),pw).then(function(o){ vaultPw=pw; if($('vrem').checked) lsSet(LS.vaultpw,pw); vaultOpen=o; vaultSeen=get(['vault']).t; vaultMode='open'; vaultHtml(); }).catch(function(){ $('verr').textContent='That passphrase did not open it.'; }); });
+      $('vreset').addEventListener('click',function(e){ e.preventDefault(); if(this.dataset.armed){ lsDel(LS.vaultpw); vaultPw=''; vaultOpen=null; vaultMode='none'; setField(['vault'],{ct:null,iv:null,salt:null,t:Date.now()}); vaultHtml(); } else { this.dataset.armed='1'; this.textContent='Tap again to erase the vault for everyone'; } });
+      if(vaultPw){ decrypt(v,vaultPw).then(function(o){ vaultOpen=o; vaultSeen=v.t; vaultMode='open'; vaultHtml(); }).catch(function(){ lsDel(LS.vaultpw); vaultPw=''; }); }
       return;
     }
     var h='<div class="grid">';
@@ -953,13 +953,15 @@ What the money buys: about 20 hours a week of a trained aide for three months (a
     box.querySelectorAll('[data-copy]').forEach(function(b){ b.addEventListener('click',function(){ copyText($(b.dataset.copy).value,b,'Copy'); }); });
     $('vsave').addEventListener('click',function(){ var o={}; VF.forEach(function(f){ o[f[0]]=$('v-'+f[0]).value; }); var btn=this;
       encrypt(o,vaultPw).then(function(enc){ vaultOpen=o; vaultSeen=enc.t; setField(['vault'],enc); btn.textContent='Saved'; btn.classList.add('done'); setTimeout(function(){ btn.textContent='Save to the vault'; btn.classList.remove('done'); },1800); }); });
-    $('vlock').addEventListener('click',function(){ lsDel(LS.vaultpw); vaultPw=''; vaultOpen=null; vaultHtml(); });
+    $('vlock').addEventListener('click',function(){ lsDel(LS.vaultpw); vaultPw=''; vaultOpen=null; vaultMode='locked'; vaultHtml(); });
   }
+  var vaultMode='';
   function renderVault(){
-    var v=get(['vault']);
-    if(vaultOpen!==null&&v&&v.ct&&v.t!==vaultSeen&&vaultPw){ decrypt(v,vaultPw).then(function(o){ if(!$('vaultbody').contains(document.activeElement)){ vaultOpen=o; vaultSeen=v.t; vaultHtml(); } }).catch(function(){}); return; }
-    if(vaultOpen!==null&&v&&!v.ct){ vaultOpen=null; vaultHtml(); return; }
-    if(!$('vaultbody').children.length) vaultHtml();
+    var v=get(['vault']), has=!!(v&&v.ct);
+    if(vaultOpen!==null&&!has){ vaultOpen=null; }
+    var want=vaultOpen!==null?'open':(has?'locked':'none');
+    if(want==='open'&&has&&v.t!==vaultSeen&&vaultPw){ decrypt(v,vaultPw).then(function(o){ if(!$('vaultbody').contains(document.activeElement)){ vaultOpen=o; vaultSeen=v.t; vaultMode='open'; vaultHtml(); } }).catch(function(){}); return; }
+    if(want!==vaultMode||!$('vaultbody').children.length){ vaultMode=want; vaultHtml(); }
   }
 
   /* ================= mobile table labels ================= */
