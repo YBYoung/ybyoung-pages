@@ -920,7 +920,7 @@ What the money buys: about 20 hours a week of a trained aide for three months (a
 
   /* ================= vault (encrypted on this phone) ================= */
   var VF=[['ssn','Social Security number','password'],['dob','Date of birth','text'],['mcdcase','Medicaid case number','text'],['mcdid','Medicaid billing / member ID','text'],['ssiclaim','SSI claim or protective filing date','text'],['waiver','Waiver / CareStar / PPL IDs','text'],['other','Anything else (passwords for portals, plan ID, doctor portal login)','textarea']];
-  var vaultPw=lsGet(LS.vaultpw,''), vaultOpen=null, vaultSeen=null, subtle=window.crypto&&crypto.subtle, enc=new TextEncoder(), dec=new TextDecoder();
+  var vaultPw=lsGet(LS.vaultpw,''), vaultOpen=null, vaultBase={}, vaultSeen=null, subtle=window.crypto&&crypto.subtle, enc=new TextEncoder(), dec=new TextDecoder();
   function b64(buf){ var s='',a=new Uint8Array(buf); for(var i=0;i<a.length;i++) s+=String.fromCharCode(a[i]); return btoa(s); }
   function unb64(s){ var b=atob(s),a=new Uint8Array(b.length); for(var i=0;i<b.length;i++) a[i]=b.charCodeAt(i); return a; }
   function key(pw,salt){ return subtle.importKey('raw',enc.encode(pw),'PBKDF2',false,['deriveKey']).then(function(km){ return subtle.deriveKey({name:'PBKDF2',salt:salt,iterations:250000,hash:'SHA-256'},km,{name:'AES-GCM',length:256},false,['encrypt','decrypt']); }); }
@@ -938,11 +938,12 @@ What the money buys: about 20 hours a week of a trained aide for three months (a
     }
     if(vaultOpen===null){
       box.innerHTML='<div class="locked"><p><b>Locked.</b> Enter the vault passphrase to see or edit the details.</p><form id="vunlock"><input type="password" id="vpw" placeholder="vault passphrase" autocomplete="current-password"><button class="btn" type="submit">Unlock</button><label class="chk"><input type="checkbox" id="vrem"> Remember the passphrase on this phone</label><span class="err" id="verr"></span></form><p><small><a href="#" id="vreset">Lost the passphrase? Start the vault over</a> (erases the saved details for everyone).</small></p></div>';
-      $('vunlock').addEventListener('submit',function(e){ e.preventDefault(); var pw=$('vpw').value; decrypt(get(['vault']),pw).then(function(o){ vaultPw=pw; if($('vrem').checked) lsSet(LS.vaultpw,pw); vaultOpen=o; vaultSeen=get(['vault']).t; vaultMode='open'; vaultHtml(); }).catch(function(){ $('verr').textContent='That passphrase did not open it.'; }); });
+      $('vunlock').addEventListener('submit',function(e){ e.preventDefault(); var pw=$('vpw').value; pull().then(function(){ return decrypt(get(['vault']),pw); }).then(function(o){ vaultPw=pw; if($('vrem').checked) lsSet(LS.vaultpw,pw); vaultOpen=o; vaultSeen=get(['vault']).t; vaultMode='open'; vaultHtml(); }).catch(function(){ $('verr').textContent='That passphrase did not open it.'; }); });
       $('vreset').addEventListener('click',function(e){ e.preventDefault(); if(this.dataset.armed){ lsDel(LS.vaultpw); vaultPw=''; vaultOpen=null; vaultMode='none'; setField(['vault'],{ct:null,iv:null,salt:null,t:Date.now()}); vaultHtml(); } else { this.dataset.armed='1'; this.textContent='Tap again to erase the vault for everyone'; } });
       if(vaultPw){ decrypt(v,vaultPw).then(function(o){ vaultOpen=o; vaultSeen=v.t; vaultMode='open'; vaultHtml(); }).catch(function(){ lsDel(LS.vaultpw); vaultPw=''; }); }
       return;
     }
+    vaultBase=Object.assign({},vaultOpen);
     var h='<div class="grid">';
     VF.forEach(function(f){ var id='v-'+f[0], val=esc(vaultOpen[f[0]]||'');
       if(f[2]==='textarea') h+='<label style="grid-column:1/-1">'+f[1]+'<textarea id="'+id+'" rows="3">'+val+'</textarea></label>';
@@ -951,8 +952,15 @@ What the money buys: about 20 hours a week of a trained aide for three months (a
     box.innerHTML=h;
     box.querySelectorAll('[data-show]').forEach(function(b){ b.addEventListener('click',function(){ var i=$(b.dataset.show); i.type=i.type==='password'?'text':'password'; b.textContent=i.type==='password'?'Show':'Hide'; }); });
     box.querySelectorAll('[data-copy]').forEach(function(b){ b.addEventListener('click',function(){ copyText($(b.dataset.copy).value,b,'Copy'); }); });
-    $('vsave').addEventListener('click',function(){ var o={}; VF.forEach(function(f){ o[f[0]]=$('v-'+f[0]).value; }); var btn=this;
-      encrypt(o,vaultPw).then(function(enc){ vaultOpen=o; vaultSeen=enc.t; setField(['vault'],enc); btn.textContent='Saved'; btn.classList.add('done'); setTimeout(function(){ btn.textContent='Save to the vault'; btn.classList.remove('done'); },1800); }); });
+    $('vsave').addEventListener('click',function(){ var btn=this, cur={}, changed={};
+      VF.forEach(function(f){ cur[f[0]]=$('v-'+f[0]).value; if((cur[f[0]]||'')!==(vaultBase[f[0]]||'')) changed[f[0]]=cur[f[0]]; });
+      btn.disabled=true; btn.textContent='Saving';
+      // Fetch the newest shared copy first, then lay only the fields changed here on top of it.
+      pull().then(function(){ var v=get(['vault']); if(v&&v.ct&&v.t!==vaultSeen) return decrypt(v,vaultPw).catch(function(){ return vaultBase; }); return vaultBase; })
+      .then(function(latest){ var o=Object.assign({},latest||{},changed); return encrypt(o,vaultPw).then(function(enc){ vaultOpen=o; vaultBase=Object.assign({},o); vaultSeen=enc.t; setField(['vault'],enc);
+        VF.forEach(function(f){ var el=$('v-'+f[0]); if(el&&el!==document.activeElement) el.value=o[f[0]]||''; });
+        btn.textContent='Saved'; btn.classList.add('done'); setTimeout(function(){ btn.textContent='Save to the vault'; btn.classList.remove('done'); },1800); }); })
+      .catch(function(){ btn.textContent='Could not save, try again'; }).then(function(){ btn.disabled=false; }); });
     $('vlock').addEventListener('click',function(){ lsDel(LS.vaultpw); vaultPw=''; vaultOpen=null; vaultMode='locked'; vaultHtml(); });
   }
   var vaultMode='';
@@ -960,7 +968,7 @@ What the money buys: about 20 hours a week of a trained aide for three months (a
     var v=get(['vault']), has=!!(v&&v.ct);
     if(vaultOpen!==null&&!has){ vaultOpen=null; }
     var want=vaultOpen!==null?'open':(has?'locked':'none');
-    if(want==='open'&&has&&v.t!==vaultSeen&&vaultPw){ decrypt(v,vaultPw).then(function(o){ if(!$('vaultbody').contains(document.activeElement)){ vaultOpen=o; vaultSeen=v.t; vaultMode='open'; vaultHtml(); } }).catch(function(){}); return; }
+    if(want==='open'&&has&&v.t!==vaultSeen&&vaultPw){ decrypt(v,vaultPw).then(function(o){ var ae=document.activeElement, typing=ae&&$('vaultbody').contains(ae)&&/^(INPUT|TEXTAREA)$/.test(ae.tagName); if(!typing){ vaultOpen=o; vaultSeen=v.t; vaultMode='open'; vaultHtml(); } }).catch(function(){}); return; }
     if(want!==vaultMode||!$('vaultbody').children.length){ vaultMode=want; vaultHtml(); }
   }
 
