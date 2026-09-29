@@ -90,6 +90,8 @@
   .table-wrap { overflow-x: auto; }
   td.hi { color: #be123c; font-weight: 600; }
   td.ok { color: #047857; font-weight: 600; }
+  table.tl th, table.tl td { text-align: left; vertical-align: top; line-height: 1.5; }
+  table.tl td:first-child { white-space: nowrap; font-weight: 600; color: #1c1917; }
 
   /* Screenshots with notes */
   .shots { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 12px 0 6px; }
@@ -162,7 +164,7 @@
     <p>Sophia, this is for you, not for the client. Kari sent the Performance screen from the practice's Google Business Profile showing 261 interactions for September, the lowest month on that chart, as one more sign the trend is heading the wrong way. Below is the full record from Google for that profile, what a Cape Coral searcher sees on Google today, what we control and what we don't, and how I would think about it before the call. It covers the Google profile only.</p>
   </div>
 
-  <p class="executive-summary">The decline in profile interactions is real, and it is worth watching. It did not start this month or with the new website: it began in November 2025, and most of it is one thing, the profile being shown less often in regular mobile Google search results. Calls held up longer than views did and have been lower since May, which is the part we cannot fully explain yet. Views of the listing on Google Maps itself are flat to slightly up over the same period, and the share of people who see the profile and then call, click or ask for directions is higher than it was a year ago. September is also not finished: Google's data for the month ends on the 25th, and at the current daily pace the month lands near 320, level with February and June. One part of this is specific to the practice: the profile is being shown far less often for implant searches than it was a year ago, while searches for a dentist in Cape Coral held steady. That is where the SEO work is going.</p>
+  <p class="executive-summary">The decline in profile interactions is real, and it is worth watching. It did not start this month or with the new website: it began in November 2025, and most of it is one thing, the profile being shown less often in regular mobile Google search results. Calls held up longer than views did and have been lower since May, which is the part we cannot fully explain yet. Views of the listing on Google Maps itself are flat to slightly up over the same period. September is also not finished: Google's data for the month ends on the 25th, and at the current daily pace the month lands near 320, level with February and June. One part of this is specific to the practice: implant searches. Those searches faded in the fall of 2025 and have started to return since the new site launched.</p>
 
   <h2 class="sec">What Kari said, and what the full record shows</h2>
   <div class="claims">
@@ -172,7 +174,7 @@
         <div class="lab">What the data shows</div>
         <p><strong>The 261 is real but incomplete.</strong> Google's Business Profile data runs several days behind and revises the most recent two to three weeks. When we pulled the profile through Google's API on September 29, the last full day of data was September 25. Through that date the month had 267 interactions, 10.7 a day, which puts the full month near 320. February had 319 and June had 305. September is on the low side, not at a new low.</p>
         <p><strong>The decline is older than the website.</strong> The chart on her screen starts in April. The full record below starts in April 2025. Interactions ran 430 to 555 a month through October 2025, stepped down in November 2025, and have run 305 to 467 since. The new website went live on May 29, 2026, six months after the step down. The month of the switch (June, 305) was the low point and the three months since have been higher: 344, 397, and September on pace for about 320.</p>
-        <p><strong>Calls are the part to watch.</strong> Views and website clicks stepped down in November 2025. Calls did not: they held between 104 and 156 a month from April 2025 through April 2026, and have run 81 to 99 a month since May. September has 57 through the 25th, 2.3 a day against 3.2 in August, including one week (September 14 to 20) with six calls. May is the month Google's core update rolled out and the new site launched, and from launch until September 29 the profile's website link pointed at the old address. We cannot yet separate those three. The link is corrected, and the map scans at two and four weeks will show whether the rankings respond.</p>
+        <p><strong>Calls are the part to watch.</strong> Views and website clicks stepped down in November 2025. Calls did not: they held between 104 and 156 a month from April 2025 through April 2026, and have run 81 to 99 a month since May. September has 57 through the 25th, 2.3 a day against 3.2 in August, including one week (September 14 to 20) with six calls. We do not yet know why. May is the month the new site launched and the month of a Google core update, and things happening in the same month is not evidence that either one caused it.</p>
       </div>
     </div>
   </div>
@@ -183,34 +185,35 @@
       <div class="fig-sub">Business Profile Performance, Apr to Sep 2026</div>
       <div class="shot-img"><img src="img/kari-mann-gbp/client-gbp-screenshot.jpg" alt="Google Business Profile performance screen showing 2,067 interactions April to September 2026 and 261 for September"></div>
       <ol class="notes">
-        <li><b>1</b>Six months are shown, so "lowest all year" means lowest of these six. April to September is also the off season in Cape Coral.</li>
+        <li><b>1</b>Six months are shown, so "lowest all year" means lowest of these six.</li>
         <li><b>2</b>September is plotted as if it were a full month next to five full months. Google does not mark it as partial.</li>
       </ol>
     </figure>
     <figure>
       <div class="fig-title">The same profile, every month Google has on record</div>
       <div class="fig-sub">Interactions by type, April 2025 to September 2026. September is through the 25th, the last full day Google had reported when this was pulled.</div>
-      <div class="legend"><span><i style="background:#6d28d9"></i>Calls</span><span><i style="background:#be123c"></i>Website clicks</span><span><i style="background:#0369a1"></i>Direction requests</span><span><i class="line" style="background:#7c3aed"></i>Google ranking update</span></div>
+      <div class="legend"><span><i style="background:#6d28d9"></i>Calls</span><span><i style="background:#be123c"></i>Website clicks</span><span><i style="background:#0369a1"></i>Direction requests</span><span><i class="line" style="background:#7c3aed"></i>Change on Google's side</span></div>
       <div class="chart" id="chart-interactions"></div>
       <figcaption>The profile's history in Google's system starts in late March 2025, so April 2025 is the first full month available. Bookings and messages are zero throughout, so interactions are calls plus website clicks plus direction requests, the same three her Performance screen adds up. The step down happens between October and November 2025. The new site launched into the low point (June 2026) and the months since have been higher, not lower.</figcaption>
       <details class="table"><summary>Show the monthly numbers</summary><div class="table-wrap"><table id="table-interactions"></table></div></details>
     </figure>
   </div>
 
-  <h2 class="sec">Where the drop actually is: shown less, not ignored more</h2>
+  <h2 class="sec">Where the drop is: views on Google Search</h2>
   <div class="prose">
-    <p>Google reports two different things for a profile. <strong>Impressions</strong> are how many times the profile was shown to someone, split by where it was shown: on Google Maps, or in a regular Google Search results page. <strong>Interactions</strong> are what people did after seeing it. Separating the two tells you whether the problem is visibility or the listing itself.</p>
+    <p>Google reports two different things for a profile. <strong>Impressions</strong> are how many times the profile was shown to someone, split by where it was shown: on Google Maps, or in a regular Google Search results page. <strong>Interactions</strong> are what people did after seeing it. Looking at them separately shows where the loss sits.</p>
   </div>
   <figure>
     <div class="fig-title">Times the profile was shown, by surface</div>
     <div class="fig-sub">Monthly impressions on Google Search versus Google Maps, April 2025 to September 2026 (September through the 25th)</div>
     <div class="legend"><span><i class="line" style="background:#0e7490"></i>Shown in Google Search results</span><span><i class="line" style="background:#2F8F5B"></i>Shown on Google Maps</span></div>
     <div class="chart" id="chart-impressions"></div>
-    <figcaption>Search impressions fell from 1,100 to 1,900 a month in 2025 to 490 to 800 a month in 2026, and mobile accounts for almost all of that loss (mobile impressions June to August: 3,569 in 2025, 1,799 in 2026). Maps impressions were 906 for June to August 2025 and 982 for the same months in 2026. The listing is being found on Maps as often as before. It is being shown less on the regular Google results page, and the next section shows why.</figcaption>
+    <figcaption>Search impressions fell from 1,100 to 1,900 a month in 2025 to 490 to 800 a month in 2026, and mobile accounts for almost all of that loss (mobile impressions June to August: 3,569 in 2025, 1,799 in 2026). Maps impressions were 906 for June to August 2025 and 982 for the same months in 2026. The listing is being found on Maps as often as before. It is being shown less on the regular Google results page. The next sections show what that page looks like now and what changed on it.</figcaption>
     <details class="table"><summary>Show impressions, interactions and the rate each month</summary><div class="table-wrap"><table id="table-rate"></table></div></details>
   </figure>
   <div class="callout">
-    <p><strong>The people who do see the profile act on it more than last year.</strong> Interactions per 100 impressions ran 24 to 37 through 2025 and 34 to 56 in 2026. A listing that was getting worse would show the opposite: the same number of views with fewer people acting. What we see is fewer views on one surface, with the listing converting better than it did.</p>
+    <p><strong>What this does and does not tell us.</strong> Views fell further than actions did: June to August views were down 39 percent on last year, and calls, website clicks and direction requests together were down 26 percent. So the loss starts with fewer people seeing the profile on Google Search. It does not mean the listing is doing better. Calls are down in plain numbers, 271 this summer against 363 last summer, and that is the number Kari is watching.</p>
+    <p style="margin-top:10px"><strong>How firm Google's numbers are.</strong> Calls, website clicks and direction requests are counts of taps and are the firmer numbers. Views are softer: Search Engine Roundtable reported a drop in Search views across many profiles in late June 2025 that a volunteer Google Product Expert called "a known glitch" (<a href="https://www.seroundtable.com/google-local-drops-39744.html">July 11, 2025</a>), and September 2026 data was missing until September 11 (<a href="https://www.seroundtable.com/google-business-profiles-insights-missing-42033.html">September 8, 2026</a>). Read the views chart for its direction, and the calls for their count.</p>
   </div>
 
   <h2 class="sec">What a Cape Coral searcher sees on Google today</h2>
@@ -254,81 +257,88 @@
   <div class="callout">
     <p><strong>What the ten captures had in common.</strong> We captured five searches on a phone and the same five on a desktop. No unpaid map listing showed a call button on any of them. A paid listing sat inside the map results on nine of the ten, and paid ads sat above the map results on eight of the ten. The implant searches carried the most advertising: four advertisers, against none to three on the general dentist searches.</p>
     <p style="margin-top:10px"><strong>Where Call buttons do appear.</strong> Some searches show practice cards with Call, Website and Directions buttons near the top of the page. On the searches we captured, every one of those cards sat under the "Sponsored" label. On one search, "top dentist cape coral", Google also replaced the usual map results with an AI-written list of practices, and that list had no call buttons either.</p>
-    <p style="margin-top:10px"><strong>How to read these.</strong> The browser's location was set at the office, which is the most favorable spot to search from, and a single search is a snapshot. These captures are here to show how the page is laid out, not to measure rank. Rank is measured by the 65-point map scan.</p>
+    <p style="margin-top:10px"><strong>How to read these.</strong> The browser's location was set at the office, and a single search is a snapshot. These captures are here to show how the page is laid out: what a searcher has to pass before reaching the profile, and what they can tap when they get there.</p>
   </div>
 
-  <h2 class="sec">This is happening across local search, not just to this profile</h2>
+  <h2 class="sec">What changed on Google's side</h2>
   <div class="prose">
-    <p>Two independent research groups that track Google's local results across thousands of searches have documented the same pattern. The passages below are highlighted on the source pages so they can be checked.</p>
+    <p>Two research groups that track Google's local results have documented changes to the results page over this period. They are context for the numbers, not an explanation that lets anyone off the hook. The passages below are highlighted on the source pages so they can be checked.</p>
   </div>
   <div class="source">
     <figure>
       <div class="fig-title">Paid listings inside the map results</div>
-      <div class="fig-sub">Sterling Sky, "The State of Local SEO in 2026", June 26, 2026</div>
+      <div class="fig-sub">Sterling Sky, "The State of Local SEO in 2026", first published about December 2025, chart updated May 2026</div>
       <div class="shot-img"><img src="img/kari-mann-gbp/src-sterlingsky-pack-ads-chart.jpg" alt="Sterling Sky chart: percent of keywords showing local pack ads, rising from about 3 percent in October 2025 to about 30 percent in January 2026"></div>
       <div class="quote">"Back at the beginning of 2025, local pack ads were only visible on 1% of the reports we were running on mobile devices. Fast forward to December 2025, and now almost 22% of our reports are showing them. This is a massive increase."<small><a href="https://www.sterlingsky.ca/the-state-of-local-seo-in-2026/">sterlingsky.ca/the-state-of-local-seo-in-2026</a></small></div>
-      <figcaption>Their tracked share was about 3 percent in October 2025, 14 percent in November and 30 percent in January 2026, then eased to under 10 percent by May. The profile's views on Google Search went from 1,419 in October 2025 to 1,080 in November and 490 in February 2026, and have been recovering since June. The two lines move together in time. That is not proof of cause, but it is the change on Google's side that matches the month the numbers moved.</figcaption>
+      <figcaption>Their tracked share was about 3 percent in October 2025, 14 percent in November and 30 percent in January 2026, then eased to under 10 percent by May. The profile's views on Google Search went from 1,419 in October 2025 to 1,080 in November and 490 in February 2026, and have been recovering since June. The two lines move together in time. That is not proof of cause, but it is the change on Google's side that matches the month the views moved. It does not explain calls: by April and May 2026, when calls from the profile stepped down, these paid listings were becoming less common, not more.</figcaption>
     </figure>
     <figure>
-      <div class="fig-title">Calls from profiles are falling even where rankings hold</div>
+      <div class="fig-title">Calls from profiles, in one outside study</div>
       <div class="fig-sub">Sterling Sky with Jepto, 179 profiles across 34 firms, January 2024 to October 2025</div>
       <div class="shot-img"><img src="img/kari-mann-gbp/src-sterlingsky-calls-chart.jpg" alt="Sterling Sky chart of call clicks by month across 179 business profiles, declining from 10,720 in January 2024 to 8,013 in October 2025"></div>
       <div class="quote">"If you have a business profile that ranks really well, even if you don't see a drop in ranking, your calls from the business profile are going down over time."<small><a href="https://www.sterlingsky.ca/the-state-of-local-seo-in-2026/">sterlingsky.ca/the-state-of-local-seo-in-2026</a></small></div>
-      <figcaption>Across the profiles in this study, calls fell from 10,720 a month to 8,013, about 25 percent, over 22 months. The study covers law firms, not dentists; the same article notes Google made the same change to dental results earlier.</figcaption>
+      <figcaption>Across the profiles in this study, calls fell from 10,720 a month to 8,013, about 25 percent, over 22 months. The study covers law firms, not dentists.</figcaption>
     </figure>
     <figure>
-      <div class="fig-title">Call buttons now appear on the paid listings only</div>
-      <div class="fig-sub">Whitespark, "17 Local Developments You Need to Know About from Q4 2025"</div>
+      <div class="fig-title">Call buttons do not always appear on the free listings</div>
+      <div class="fig-sub">Whitespark (Miriam Ellis), "17 Local Developments You Need to Know About from Q4 2025", January 8, 2026</div>
       <div class="shot-img"><img src="img/kari-mann-gbp/src-whitespark-call-buttons.jpg" alt="Whitespark article with the sentence about call buttons only showing on sponsored placements highlighted"></div>
       <div class="quote">"...Google only showing call buttons on sponsored placements while they are totally absent from the local pack. The local businesses you're marketing may be experiencing a drop in calls as a result."<small><a href="https://whitespark.ca/blog/17-local-developments-you-need-to-know-about-from-q4-2025/">whitespark.ca/blog</a></small></div>
-      <figcaption>This is what the Cape Coral captures above show: on all ten, the only Call button in the map results belonged to the paid listing.</figcaption>
+      <figcaption>In our ten Cape Coral captures, the Call buttons in the map results were on the paid listing. That is a sample, not a rule: one outside check of 90 dental results on phones found a call button on 6 of them (<a href="https://smallbizedge.com/reports/map-pack-call-buttons/">Smallbiz Edge, March 2026</a>, a small study). For dental searches this is also not new. Sterling Sky reported it in December 2024 using 2023 data, so it is background to the numbers on this page, not the reason calls changed this May.</figcaption>
     </figure>
-    <figure>
-      <div class="fig-title">Google's ranking updates in this period</div>
-      <div class="fig-sub">Google Search Status Dashboard, ranking history</div>
-      <div class="shot-img"><img src="img/kari-mann-gbp/src-google-status.jpg" alt="Google Search Status Dashboard listing the May 2026, March 2026 and December 2025 core updates and the September 2026 spam update"></div>
-      <figcaption>These are the dates marked on the charts above. The May 2026 core update began eight days before the new site launched. A spam update that began on September 24 was still rolling out when the search captures on this page were taken. Source: <a href="https://status.search.google.com/products/rGHU1u87FJnkP6W2GwMi/history">status.search.google.com</a>.</figcaption>
+    <figure style="grid-column: 1 / -1">
+      <div class="fig-title">What changed in Google's local results, and when</div>
+      <div class="fig-sub">Changes to the map results first, Google's general updates second. "Confirmed" means confirmed by Google.</div>
+      <div class="table-wrap">
+        <table class="tl">
+          <thead><tr><th>When</th><th>What changed</th><th>Confirmed by Google</th><th>Source</th></tr></thead>
+          <tbody>
+            <tr><td>2023, reported Dec 2024</td><td>On phones, the free map listings for dental searches stop showing click-to-call buttons</td><td>No</td><td><a href="https://www.sterlingsky.ca/why-your-website-traffic-sucks-now/">Sterling Sky, Dec 6, 2024</a></td></tr>
+            <tr><td>Oct 9 to 13, 2025</td><td>Call buttons reported missing from free listings across more industries, still present on paid ones</td><td>No</td><td><a href="https://www.seroundtable.com/google-local-results-without-call-button-40260.html">Search Engine Roundtable, Oct 13, 2025</a></td></tr>
+            <tr><td>October 2025</td><td>AI-written map results begin replacing the usual three listings on phones, showing one or two practices and no call buttons</td><td>No</td><td><a href="https://www.sterlingsky.ca/the-state-of-local-seo-in-2026/">Sterling Sky</a></td></tr>
+            <tr><td>November 2025</td><td>Paid listings inside the map results jump from about 3 percent of tracked searches to 14 percent, peak near 30 percent in January 2026, then ease to under 10 percent by May 2026</td><td>No</td><td><a href="https://www.sterlingsky.ca/the-state-of-local-seo-in-2026/">Sterling Sky</a></td></tr>
+            <tr><td>Dec 11 to 29, 2025</td><td>Core update (general, not local)</td><td>Yes</td><td><a href="https://status.search.google.com/products/rGHU1u87FJnkP6W2GwMi/history">Google</a></td></tr>
+            <tr><td>Mar 27 to Apr 8, 2026</td><td>Core update (general, not local)</td><td>Yes</td><td><a href="https://status.search.google.com/products/rGHU1u87FJnkP6W2GwMi/history">Google</a></td></tr>
+            <tr><td>May 21 to Jun 2, 2026</td><td>Core update (general). Sterling Sky measured a small effect on the map results: "While this update did impact local pack results as well, the change was not as substantial as what we saw with mobile organic results."</td><td>Yes, as a general update</td><td><a href="https://www.sterlingsky.ca/the-dynamic-serp-update-may-2026-core-update-changed-seo/">Sterling Sky, Sep 2, 2026</a></td></tr>
+            <tr><td>Sep 24, 2026</td><td>Spam update (general), still rolling out on September 29</td><td>Yes</td><td><a href="https://status.search.google.com/products/rGHU1u87FJnkP6W2GwMi/history">Google</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <figcaption><strong>Google confirmed no local ranking update anywhere in this period.</strong> The last two it confirmed were in late 2021 and November 2023. Sterling Sky's note on that: "it's pretty uncommon for Google to announce or confirm updates to the local algorithm." So everything in the top half of this table comes from people who track the results, not from Google.<br><br><strong>Google has made no public comment</strong> on the call buttons, the paid listings inside the map results, or the AI map results. We looked at Google's Business Profile help, its Search status page, and the trade press that covers these changes. The only thing Google has in writing is on the paid side: its Google Ads help page says local ads can appear as "embedded ads within organic modules" and "often include clear Calls to Action (CTAs) such as buttons or links, enabling users to directly 'Call' the business" (<a href="https://support.google.com/google-ads/answer/3246303">Google Ads Help</a>).</figcaption>
     </figure>
   </div>
 
-  <h2 class="sec">The part that is specific to the practice: implant searches</h2>
+  <div class="callout">
+    <p><strong>Our own clients: a headwind, not a rule.</strong> We checked calls from the Google profile for every single-location S8E8 client with a full record for both summers, June to August 2025 against June to August 2026. Of 38 practices, 25 had fewer calls and 13 had more. The typical change was about 9 percent down. Kari Mann's was 25 percent down.</p>
+    <p style="margin-top:10px">Two things follow. The trend is real, but a third of our practices grew their profile calls through it, each in a different local market, so this should never be framed as "it looks bad, but it is bad for everyone." And Kari Mann's drop is larger than the typical one, so the trend explains part of it, not all of it. The goal is to move this practice into the group that is growing.</p>
+  </div>
+
+  <h2 class="sec">Implant searches: when they fell, and where they are now</h2>
   <div class="prose">
-    <p>Google also reports which searches caused the profile to be shown. Comparing January to August 2025 against January to August 2026, the general dentistry searches held and the implant and gum searches collapsed. Google shows counts under 15 only as "under 15".</p>
+    <p>Google also reports which searches caused the profile to be shown, month by month. Kari's goal is more implant and All-on-X patients, so this is the part of the profile data that matters most to her. Searches for the practice by name are left out of the chart, because the profile's name itself contains the words "dental implants".</p>
   </div>
   <figure>
-    <div class="fig-title">Searches that showed the profile, January to August, 2025 versus 2026</div>
-    <div class="fig-sub">Times the profile appeared for each search, from the Business Profile search terms report</div>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>Search</th><th>Jan to Aug 2025</th><th>Jan to Aug 2026</th></tr></thead>
-        <tbody>
-          <tr><td>dentist cape coral</td><td>256</td><td class="ok">254</td></tr>
-          <tr><td>dentist</td><td>187</td><td class="ok">297</td></tr>
-          <tr><td>best dentist in cape coral</td><td>173</td><td class="ok">165</td></tr>
-          <tr><td>Practice name, all spellings combined</td><td>456</td><td class="ok">479</td></tr>
-          <tr><td>dental implants cape coral</td><td>244</td><td class="hi">32</td></tr>
-          <tr><td>dental implant cape coral</td><td>109</td><td class="hi">25</td></tr>
-          <tr><td>dental implants in cape coral</td><td>97</td><td class="hi">19</td></tr>
-          <tr><td>dental implants</td><td>75</td><td class="hi">under 15</td></tr>
-          <tr><td>periodontist cape coral</td><td>82</td><td class="hi">under 15</td></tr>
-          <tr><td>periodontics cape coral</td><td>41</td><td class="hi">none</td></tr>
-          <tr><td>dentist near me</td><td>113</td><td class="hi">under 15</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <figcaption>Every search with the word "implant" or "periodont" in it fell by 75 to 95 percent, while searches for a dentist by name or by city held or grew. The profile's settings do not explain this: it carries the Dental implants provider and Dental implants periodontist categories and lists implant services, and none of that changed. Implant searches are also the most heavily advertised dental searches: in the captures above the practice was the first map listing for "dental implants cape coral", but that listing sat a screen and a half down the page, under four ads. This is the one finding in the profile data that is specific to the practice, and it lines up with the goal of more implant and All-on-X patients, so it is where we are concentrating: the services named on the profile, and the map scans for implant searches specifically.</figcaption>
+    <div class="fig-title">Times the profile was shown for implant searches, by month</div>
+    <div class="fig-sub">Searches containing "implant" or "all on", practice-name searches excluded, April 2025 to August 2026. Google reports September after the month ends.</div>
+    <div class="chart" id="chart-implant"></div>
+    <figcaption>Google only gives an exact count for a search once it reaches 15 in a month. Below that it reports "under 15", which is why some months show zero counted even though implant searches were still showing the profile. The table has both.</figcaption>
+    <details class="table" open><summary>Monthly numbers</summary><div class="table-wrap"><table id="table-implant"></table></div></details>
   </figure>
-
-  <h2 class="sec">What we found and fixed on the profile</h2>
   <div class="prose">
-    <p>We went through the profile's settings looking for anything that could be holding the listing back. It is well built: nine categories including Dental implants provider, 22 listed services, complete hours, and a 5.0 rating across 895 reviews. One item was ours to fix and is fixed: the website link. I would raise it with Kari ourselves instead of waiting for her to find it.</p>
+    <p><strong>When it fell: before the new site, and before we started.</strong> May 2025 was a one-month spike (369), well above anything before or after it. Outside that month, implant searches showed the profile about 50 times a month in spring and summer 2025, about 20 a month in September and October 2025, and from November 2025 through June 2026 no implant search reached 15 in a month. The new site launched on May 29, 2026.</p>
+    <p><strong>Where it is now.</strong> July 2026, the second month after launch, had 76: the highest month on record outside the May 2025 spike. August had nine different implant searches showing the profile, each under 15, the most variety since August 2025. It is two months, so it is a start and not yet a trend.</p>
+    <p><strong>A correction to how this usually gets summarized.</strong> Adding up January to August makes 2025 look far stronger than it was, because more than half of that total came from May 2025 alone. The month-by-month view is the fair one.</p>
+  </div>
+
+  <h2 class="sec">The profile itself</h2>
+  <div class="prose">
+    <p>We went through the profile's settings. It is well built: nine categories including Dental implants provider, 22 listed services, complete hours, and a 5.0 rating across 895 reviews.</p>
   </div>
   <div class="status">
     <div class="col">
       <div class="head"><span class="dot" style="background:#047857"></span><span style="color:#047857">Done</span></div>
       <ul>
-        <li><b>Profile website link corrected.</b> After the site launch the profile still linked to the old address (without "www"), which only reached the new site through a redirect. It now links directly to the new site, with a tag that lets us count visits from the profile separately from other Google visits.<span class="when">Sep 29</span></li>
-        <li><b>Profile services link corrected.</b> Same fix on the services link.<span class="when">Sep 29</span></li>
+        <li><b>Profile website and services links updated,</b> with a tag that lets us count visits from the profile separately from other Google visits.<span class="when">Sep 29</span></li>
         <li><b>Business Profile listings reviewed</b> and new photos added.<span class="when">September</span></li>
       </ul>
     </div>
@@ -336,20 +346,20 @@
       <div class="head"><span class="dot" style="background:#0369a1"></span><span style="color:#0369a1">Next</span></div>
       <ul>
         <li><b>All-on-X, implant-supported dentures, TeethXpress and gum grafting added to the profile's services.</b> The profile already lists 22 services, including dental implants, full mouth dental implants and periodontics. These four are the implant and gum treatments it does not yet name.</li>
-        <li><b>Map scan re-run at two and four weeks</b> after the link fix, on the same 65-point grid as the September review, so the effect is measured rather than assumed.</li>
         <li><b>Full September profile numbers</b> reported once Google finalizes the month, mid-October.</li>
+        <li><b>The same five profile numbers every month:</b> calls, website clicks, direction requests, views on Search and on Maps, and implant searches that showed the profile.</li>
       </ul>
     </div>
   </div>
 
   <h2 class="sec">How I would think about it</h2>
   <div class="prose">
-    <p><strong>Two different things are being called "the decline", and they need to stay separate.</strong> The first is how often the profile is shown on the regular Google results page. That fell in November 2025, it is happening across local search, and we can show why. The second is calls from the profile, which held until April and have been lower since May. We can describe that one accurately, but we cannot yet say what caused it. If the two get blended on the call, the part we can explain ends up sounding like an excuse for the part we can't.</p>
+    <p><strong>Two different things are being called "the decline", and they need to stay separate.</strong> The first is how often the profile is shown on the regular Google results page. That fell in November 2025, and we can show what changed on Google's results page that same month. The second is calls from the profile, which held until April and have been lower since May. We can describe that one accurately, but we cannot yet say what caused it. If the two get blended on the call, the part we can document ends up sounding like an excuse for the part we can't.</p>
     <p><strong>The profile is one door into the practice, not the whole building.</strong> Kari's own scoreboard is points of contact: the phone rings, or someone requests an appointment. Profile interactions are one source feeding that number. They are worth watching, but a change in this one source is not the same thing as a change in her total. Her tracking sheet is the right scoreboard, and this is one line on it.</p>
-    <p><strong>Every Call button on the results page belongs to someone who is paying.</strong> In all of our captures the only Call buttons were on paid placements, and the practice was not in any of them. The free map listing still shows the practice, its rating and a review, but a searcher has to tap into it to call. That is Google's layout, for every dentist in Cape Coral. Whether the practice should be in those paid spots is a question for the Ads side, not something the profile can solve.</p>
-    <p><strong>Where it matters to her goal, the practice ranks well.</strong> For "dental implants cape coral" the practice was first in the map results from the office, second on a desktop, and second on a separate phone check. The challenge on implant searches is what Google places above the map results, which is four advertisers.</p>
-    <p><strong>What we control and what we don't.</strong> We control how complete and accurate the profile is, where it links, which services it names, and the ranking work measured by the map scan. The practice controls the flow of new reviews. Nobody but Google controls the page layout, the ads above the map results, or the missing call buttons.</p>
-    <p><strong>What we do not know yet.</strong> Why calls stepped down in May. And whether rankings for the general searches moved this week: in two of today's single searches ("dentist cape coral" and "dentist near me") the practice did not appear in the map results, which does not match the September scan. Google is in the middle of a spam update that began September 24, and the profile's link changed the same day we searched, so single searches are especially unreliable right now. The map scan will answer it.</p>
+    <p><strong>Call buttons do not always appear on the free listing.</strong> In the searches we captured, the Call buttons sat on paid placements, and the practice was not in any of them. The free listing still showed the practice, its rating and a review, but a searcher had to tap into it to call. That is not true of every search, so it should be described as something that often happens, not something that always does. For dental searches it also goes back to 2023, and Google has never commented on it, so it should not be offered as the reason anything changed this year.</p>
+    <p><strong>On her actual goal, the direction since launch is up.</strong> Implant searches stopped showing the profile in meaningful numbers in November 2025. July 2026 was the best implant month on record outside one spike, and August showed more variety. That is the most useful thing in this whole record for Kari, and it is measured in her own profile's numbers.</p>
+    <p><strong>What we control and what we don't.</strong> We control how complete and accurate the profile is, where it links and which services it names. The practice controls the flow of new reviews. Nobody but Google controls the page layout or the ads above the map results.</p>
+    <p><strong>What we do not know yet.</strong> Why calls from the profile stepped down in May. We can describe it exactly, and we will keep reporting it monthly, but we should not offer a cause we cannot support.</p>
   </div>
 
   <h2 class="sec">On the call: what I would say, and what I would avoid</h2>
@@ -359,19 +369,18 @@
       <ul>
         <li><b>September is not finished.</b> Google's data ends on the 25th. At this pace the month lands near 320, level with February and June. We will bring the full month in mid-October.</li>
         <li><b>The drop in views started in November 2025,</b> before we began and before the new site, and it matches the month paid listings started appearing inside the map results.</li>
-        <li><b>People who see the profile act on it more than they did last year.</b> The listing itself is not the weak point.</li>
-        <li><b>The practice shows at the top of the map results for implant searches.</b> What sits above them is paid.</li>
         <li><b>Calls from the profile have been lower since May.</b> We are measuring that, not guessing at it.</li>
-        <li><b>We found the profile's website link pointing at the old address and corrected it on September 29.</b> We will re-run the map scan at two and four weeks to see the effect.</li>
+        <li><b>Implant searches are showing the profile again.</b> They faded in November 2025, and July 2026 was the strongest month on record outside one spike.</li>
+        <li><b>We will report the same five profile numbers every month,</b> so the trend she is tracking is measured the same way each time.</li>
       </ul>
     </div>
     <div class="col">
       <div class="head"><span class="dot" style="background:#be123c"></span><span style="color:#be123c">Avoid</span></div>
       <ul>
-        <li><b>"Rankings are holding."</b> Not until the new scan is back.</li>
         <li><b>Arguing that her 261 is wrong.</b> It is real. It is partial, and it is one source.</li>
-        <li><b>Promising a ranking, a date, or a number of calls.</b></li>
-        <li><b>Blaming the site launch, or clearing it.</b> May had three things happen at once and we cannot separate them yet.</li>
+        <li><b>Promising a date or a number of calls.</b></li>
+        <li><b>Naming a cause for the May change in calls.</b> We do not have one we can support.</li>
+        <li><b>"It is bad for everyone."</b> A third of our practices grew their profile calls this year.</li>
         <li><b>Using any single search as proof,</b> hers or ours, in either direction.</li>
         <li><b>"We will optimize the profile."</b> It is already built out. Say specifically what is being added.</li>
       </ul>
@@ -391,10 +400,11 @@
 
   <div class="method">
     <div class="h">How this was measured</div>
+    <div class="src-row"><span class="dot" style="background:#0369a1"></span><span><b>Other S8E8 clients:</b> calls from the Google profile, June to August 2025 against June to August 2026, for the 38 single-location clients with a full record for both periods and at least 60 calls in summer 2025. Same Google source as this profile.</span></div>
     <div class="src-row"><span class="dot" style="background:#0369a1"></span><span><b>Business Profile numbers:</b> Google Business Profile Performance API, location 837371878889904501, daily metrics April 1, 2025 to September 26, 2026, pulled September 29, 2026. Monthly totals for April to August 2026 match the Performance screen Kari sent (390, 370, 305, 344, 397). Search terms from the same API's search keywords report, January to August of each year.</span></div>
     <div class="src-row"><span class="dot" style="background:#0e7490"></span><span><b>Search result captures:</b> taken September 29, 2026 through a browser located in Cape Coral, Florida, on a phone-sized and a desktop-sized screen. The location was set at the office. Google personalizes results, so another person's screen can differ in detail; the order of the sections is what these captures are meant to show.</span></div>
-    <div class="src-row"><span class="dot" style="background:#7c3aed"></span><span><b>Google ranking updates</b> from Google's Search Status Dashboard: December 11 to 29, 2025; March 27 to April 8, 2026; May 21 to June 2, 2026.</span></div>
-    <div class="src-row"><span class="dot" style="background:#a8a29e"></span><span><b>Research cited:</b> Sterling Sky (Joy Hawkins), "The State of Local SEO in 2026" and "What Actually Gets You Ranking for Near Me in 2025"; Whitespark, "17 Local Developments You Need to Know About from Q4 2025". Each passage quoted on this page was captured from the source page on September 29, 2026.</span></div>
+    <div class="src-row"><span class="dot" style="background:#7c3aed"></span><span><b>Changes to local results</b> from Sterling Sky, Whitespark and Search Engine Roundtable, each linked in the table. General updates from Google's Search Status Dashboard. Every quoted sentence was checked on its source page on September 29, 2026.</span></div>
+    <div class="src-row"><span class="dot" style="background:#a8a29e"></span><span><b>Research cited:</b> Sterling Sky (Joy Hawkins), "The State of Local SEO in 2026" and "What Actually Gets You Ranking for Near Me in 2025"; Whitespark, "17 Local Developments You Need to Know About from Q4 2025"; Search Engine Roundtable; Smallbiz Edge, "The State of Google Map Pack Call Buttons"; Google Ads Help, "About Local Ads".</span></div>
   </div>
 
   <div class="footer">
@@ -513,11 +523,10 @@
   const inter = calls.map((c, i) => c + web[i] + dirs[i]);
   const imps  = search.map((s, i) => s + maps[i]);
   const markers = [
-    { at: 8 + 11 / 31, text: 'Core update Dec 11 to 29', cls: 'update' },
-    { at: 11 + 27 / 31, text: 'Core update Mar 27 to Apr 8', cls: 'update', dy: 16 },
-    { at: 13 + 21 / 31, text: 'Core update May 21 to Jun 2', cls: 'update', dy: 32 },
-    { at: 13 + 29 / 31, text: 'New site live May 29', dy: 48 },
-    { at: 17 + 29 / 30, text: 'Profile link fixed Sep 29', dy: 64, left: true }
+    { at: 6 + 9 / 31, text: 'Oct 2025: call buttons and AI map results reported', cls: 'update' },
+    { at: 7, text: 'Nov 2025: paid map listings expand', cls: 'update', dy: 16 },
+    { at: 13 + 21 / 31, text: 'Core update May 21', cls: 'update', dy: 32, left: true },
+    { at: 13 + 29 / 31, text: 'New site live May 29', dy: 48 }
   ];
 
   stackedColumns('chart-interactions', labels, [
@@ -532,6 +541,17 @@
     { name: 'Google Search', color: '#0e7490', values: search },
     { name: 'Google Maps', color: '#2F8F5B', values: maps }
   ], { full, yMax: 2000, partial: new Set([17]), markers: markers.map((m) => Object.assign({}, m, { at: Math.min(m.at, labels.length - 1) })), aria: 'Monthly profile impressions on Google Search and Google Maps, April 2025 to September 2026' });
+  const impLabels = ['Apr 25','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan 26','Feb','Mar','Apr','May','Jun','Jul','Aug'];
+  const impFull = full.slice(0, 17);
+  const impCount = [51,369,48,0,57,18,20,0,18,0,0,0,0,0,0,76,0];
+  const impUnder = [7,9,8,7,10,5,8,8,3,4,2,4,3,2,4,2,9];
+  stackedColumns('chart-implant', impLabels, [
+    { name: 'Counted by Google', color: '#0e7490', values: impCount }
+  ], { full: impFull, labelTotals: new Set([0, 1, 2, 4, 5, 6, 8, 15]), markers: [
+    { at: 13 + 29 / 31, text: 'New site live May 29', left: true }
+  ], aria: 'Monthly count of times the profile was shown for implant searches, April 2025 to August 2026' });
+  table('table-implant', ['Month', 'Counted (searches with 15 or more)', 'Other implant searches, each under 15'], impFull.map((m, i) => [m, impCount[i], impUnder[i]]));
+
   table('table-rate', ['Month', 'Shown in Search', 'Shown on Maps', 'Total shown', 'Interactions', 'Per 100 shown'],
     full.map((m, i) => [m, search[i], maps[i], imps[i], inter[i], Math.round(inter[i] / imps[i] * 100)]));
 })();
@@ -543,7 +563,7 @@
   if (!/[?&]edit=1/.test(location.search)) return;
   const EDITABLE = '.container h1, .container h2, .container h3, .container p, .container figcaption, .container li, .container .fig-title, .container .fig-sub, .container .lbl, .container .val, .container .note, .container .said > div, .container th, .container td, .container .quote, .container .legend span, .container .src-row > span:last-child, .container .footer p, header .client';
   document.body.classList.add('editing');
-  document.querySelectorAll(EDITABLE).forEach((el) => { if (!el.closest('.chart') && !el.closest('#table-interactions') && !el.closest('#table-rate')) el.setAttribute('contenteditable', 'true'); });
+  document.querySelectorAll(EDITABLE).forEach((el) => { if (!el.closest('.chart') && !el.closest('#table-interactions') && !el.closest('#table-rate') && !el.closest('#table-implant')) el.setAttribute('contenteditable', 'true'); });
   const bar = document.createElement('div');
   bar.className = 'editbar';
   bar.innerHTML = '<b>Editing</b><span>Click any text on the page to change it. When you are done, download the page and upload it to the s8e8-mockups repo on GitHub, or send the file to Claude to push.</span><button type="button">Download updated page</button>';
@@ -553,7 +573,7 @@
     clone.querySelector('body').classList.remove('editing');
     clone.querySelectorAll('[contenteditable]').forEach((el) => el.removeAttribute('contenteditable'));
     clone.querySelectorAll('.editbar').forEach((el) => el.remove());
-    clone.querySelectorAll('.chart, #table-interactions, #table-rate').forEach((el) => { el.innerHTML = ''; });
+    clone.querySelectorAll('.chart, #table-interactions, #table-rate, #table-implant').forEach((el) => { el.innerHTML = ''; });
     const html = '<!DOCTYPE html>\n' + clone.outerHTML + '\n';
     const a = document.createElement('a');
     a.href = URL.createObjectURL(new Blob([html], { type: 'text/html' }));
