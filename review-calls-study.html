@@ -44,6 +44,9 @@
   th:first-child, td:first-child { text-align: left; }
   th { font-weight: 700; color: #a8a29e; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; }
   td.note { color: #78716c; font-size: 12px; text-align: left; }
+  details.full { margin-top: 40px; border-top: 1px solid #e7e5e4; padding-top: 16px; }
+  details.full > summary { cursor: pointer; font-size: 13px; font-weight: 600; color: #0f766e; }
+  details.full[open] > summary { margin-bottom: 8px; }
   .caption { font-size: 12px; color: #78716c; line-height: 1.6; max-width: 720px; }
 </style>
 </head>
@@ -52,17 +55,35 @@
   <div class="rainbow"></div>
   <div class="inner">
     <img src="img/kari-mann-gbp/s8e8logo.png" alt="Studio Eighty Eight">
-    <div class="client"><b>Reviews and profile calls</b><span>Internal study · September 29, 2026</span></div>
+    <div class="client"><b>Reviews and profile calls</b><span>Internal note for Sophia · September 29, 2026</span></div>
   </div>
 </header>
 
 <div class="container">
   <div class="title-block">
-    <h1>Do new Google reviews go with more profile calls?</h1>
-    <p>38 single-location clients, November 2024 to August 2026. Google Business Profile metrics only.</p>
+    <h1>Do more Google reviews bring more calls from the profile?</h1>
+    <p>We checked across 38 of our practices, using nearly two years of their own Google profile numbers.</p>
   </div>
 
-  <p class="executive-summary">No reliable link. Month to month, a practice's new reviews do not move with its calls, in either direction. Over a full summer there is a small positive hint that could also be chance. Replies show nothing either way. This is a correlation study, so even the hint would not show that reviews cause calls.</p>
+  <p class="executive-summary">No reliable link. In our own practices, the number of new reviews in a month does not tell you anything about calls from the Google profile that month or the next. Replying to reviews made no difference either.</p>
+
+  <h2 class="sec">What we found</h2>
+  <div class="prose">
+    <ul>
+      <li><strong>A month with more reviews is not a month with more calls.</strong> When a practice got twice its usual number of reviews, its calls stayed about where they normally are.</li>
+      <li><strong>It does not show up a month later either.</strong> Reviews this month did not come before more calls next month.</li>
+      <li><strong>Replies did not matter.</strong> Months when a practice answered more of its reviews, or answered faster, had the same calls as its other months.</li>
+      <li><strong>Fewer reviews did not decide which way calls went.</strong> 17 practices got fewer reviews this summer than last. Seven of them still grew their calls.</li>
+    </ul>
+  </div>
+
+  <h2 class="sec">What it means for Kari Mann</h2>
+  <div class="prose">
+    <p>Her new reviews fell from 18 in August to 5 in September 1 to 24, the same month her calls dipped. Across our practices, a quieter review month does not go with fewer calls, so the review dip should not be offered as the reason for the calls.</p>
+  </div>
+
+  <details class="full">
+    <summary>Full numbers and method</summary>
 
   <div class="tiles">
     <div class="tile"><div class="k">Practices</div><div class="v">38</div><div class="n">single-location clients with a full profile record</div></div>
@@ -119,7 +140,6 @@
   <div class="prose">
     <p>Her new reviews fell from 18 in August 2026 to 5 in September 1 to 24, the same month her calls dipped. Across our clients, a month with fewer reviews does not reliably come with fewer calls, so the September review dip is not evidence about her calls.</p>
     <p>Over the summer, her new reviews fell from 52 to 41 and her calls from 363 to 271 (down 25 percent). 17 of our practices earned fewer reviews this summer than last. Their calls ranged from 45 percent down to 61 percent up, and seven of them grew calls. Kari Mann's 25 percent drop was the third largest of the 17. Fewer reviews did not decide which way calls went.</p>
-    <p>This does not argue against asking for reviews. Reviews also show on the profile and in what people read before they call, and this study only measures calls, clicks, directions and views.</p>
   </div>
 
   <h2 class="sec">Secondary measures</h2>
@@ -137,5 +157,6 @@
       <li><strong>Search terms</strong> were left out, as agreed: Google reports them only by month and hides terms under 15 searches.</li>
     </ul>
   </div>
+  </details>
 </div>
 </body></html>
