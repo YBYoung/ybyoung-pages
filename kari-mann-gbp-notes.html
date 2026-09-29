@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<meta name="color-scheme" content="light">
+<title>Kari Mann · Reading the Google Profile Numbers | S8E8 internal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&amp;family=Lora:ital@1&amp;display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { font-family: 'Montserrat', -apple-system, sans-serif; background: #fff; color: #1c1917; -webkit-font-smoothing: antialiased; }
+  img { max-width: 100%; }
+  a { color: #0f766e; text-decoration: underline; }
+
+  .s8-header { background: #0d0d0d; }
+  .s8-header .rainbow { height: 3px; background: linear-gradient(90deg, #ff6b6b, #ffd93d, #6bcb77, #4d96ff, #c77dff); }
+  .s8-header .inner { max-width: 1152px; margin: 0 auto; padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; }
+  .s8-header img { height: 32px; width: auto; flex-shrink: 0; }
+  .s8-header .client { text-align: right; }
+  .s8-header .client b { display: block; font-size: 14px; font-weight: 600; color: #fff; }
+  .s8-header .client span { display: block; font-size: 12px; color: #78716c; margin-top: 2px; }
+
+  .container { max-width: 1152px; margin: 0 auto; padding: 32px 24px 64px; }
+  @media (max-width: 640px) { .container { padding: 24px 16px 48px; } }
+  .title-block { margin-bottom: 24px; max-width: 720px; }
+  .title-block h1 { font-size: 20px; font-weight: 700; color: #1c1917; line-height: 1.3; }
+  .title-block p { font-size: 14px; color: #78716c; margin-top: 4px; }
+  .prose { max-width: 720px; }
+  .prose p { font-size: 14px; line-height: 1.75; color: #44403c; margin-bottom: 14px; }
+  .prose p:last-child { margin-bottom: 0; }
+  .prose ul { padding-left: 18px; margin-bottom: 14px; list-style: disc; }
+  .prose li { font-size: 14px; line-height: 1.7; color: #44403c; margin-bottom: 5px; }
+  .prose strong { font-weight: 600; color: #1c1917; }
+  .executive-summary { font-size: 15px; font-style: italic; font-family: 'Lora', Georgia, serif; color: #57534e; line-height: 1.8; max-width: 720px; margin-bottom: 8px; }
+  h2.sec { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #a8a29e; margin: 40px 0 12px; }
+  h3 { font-size: 14px; font-weight: 700; color: #1c1917; margin-bottom: 6px; }
+
+  .metric-groups { display: flex; border-radius: 8px; border: 1px solid #e7e5e4; overflow-x: auto; margin: 16px 0 8px; }
+  .metric-group { flex: 1; padding: 16px; min-width: 200px; }
+  .metric-group + .metric-group { border-left: 1px solid #e7e5e4; }
+  .metric-group .head { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid #f5f5f4; }
+  .metric-group .head .dot { width: 6px; height: 6px; border-radius: 99px; flex-shrink: 0; }
+  .metric-group .head span { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; }
+  .metric-tiles { display: flex; flex-direction: column; gap: 8px; }
+  .metric-tile { display: flex; align-items: center; justify-content: space-between; border-radius: 4px; padding: 10px 12px; background: #fafafa; border: 1px solid #f0f0f0; }
+  .metric-tile .lbl { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 4px; }
+  .metric-tile .val { font-size: 18px; font-weight: 700; color: #1c1917; line-height: 1; }
+  .metric-tile .note { font-size: 10px; color: #a8a29e; text-align: right; max-width: 120px; line-height: 1.4; }
+
+  .claims { display: flex; flex-direction: column; gap: 12px; margin: 12px 0 8px; }
+  .claim { border: 1px solid #e7e5e4; border-radius: 8px; display: grid; grid-template-columns: 260px 1fr; background: #fff; }
+  .claim .said { padding: 18px 20px; border-right: 1px solid #f5f5f4; background: #fafafa; border-radius: 8px 0 0 8px; }
+  .claim .lab { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #a8a29e; }
+  .claim .said .q { font-size: 17px; font-weight: 700; line-height: 1.3; color: #1c1917; margin-top: 6px; }
+  .claim .found { padding: 18px 20px; }
+  .claim .found .lab { color: #0369a1; }
+  .claim .found p { font-size: 14px; line-height: 1.7; color: #44403c; margin: 6px 0 8px; }
+  .claim .found p:last-child { margin-bottom: 0; }
+
+  figure { border: 1px solid #e7e5e4; border-radius: 8px; padding: 16px 18px 12px; margin: 14px 0; background: #fff; }
+  .fig-title { font-size: 13px; font-weight: 700; color: #1c1917; }
+  .fig-sub { font-size: 12px; color: #78716c; margin: 2px 0 10px; }
+  figcaption { font-size: 12.5px; color: #57534e; margin-top: 10px; line-height: 1.6; }
+  .legend { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 12px; color: #57534e; margin-bottom: 8px; }
+  .legend span { display: inline-flex; align-items: center; gap: 7px; }
+  .legend i { width: 12px; height: 12px; border-radius: 2px; display: inline-block; }
+  .legend i.line { height: 3px; width: 18px; border-radius: 2px; }
+  .chart { position: relative; overflow-x: auto; }
+  .chart svg { display: block; width: 100%; height: auto; font-family: inherit; }
+  .chart .tick { font-size: 11px; fill: #a8a29e; }
+  .chart .grid { stroke: #f5f5f4; stroke-width: 1; }
+  .chart .axis { stroke: #e7e5e4; stroke-width: 1; }
+  .chart .dlabel { font-size: 11px; font-weight: 600; fill: #44403c; }
+  .chart .marker { stroke: #57534e; stroke-width: 1; stroke-dasharray: 3 3; }
+  .chart .marker-text { font-size: 11px; font-weight: 600; fill: #57534e; }
+  .chart .marker.update { stroke: #7c3aed; }
+  .chart .marker-text.update { fill: #7c3aed; }
+  .tip { position: absolute; pointer-events: none; background: #1c1917; color: #fff; font-size: 12px; padding: 7px 10px; border-radius: 6px; white-space: nowrap; transform: translate(-50%, calc(-100% - 10px)); opacity: 0; transition: opacity .12s; z-index: 2; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.2); }
+  .tip b { font-weight: 600; }
+  .tip.show { opacity: 1; }
+  details.table { margin-top: 8px; font-size: 12px; }
+  details.table summary { cursor: pointer; color: #0f766e; font-weight: 600; }
+  table { border-collapse: collapse; width: 100%; margin-top: 8px; font-variant-numeric: tabular-nums; font-size: 12px; }
+  th, td { text-align: right; padding: 6px 8px; border-bottom: 1px solid #f5f5f4; color: #44403c; }
+  th:first-child, td:first-child { text-align: left; }
+  th { font-weight: 700; color: #a8a29e; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; }
+  .table-wrap { overflow-x: auto; }
+  td.hi { color: #be123c; font-weight: 600; }
+  td.ok { color: #047857; font-weight: 600; }
+
+  /* Screenshots with notes */
+  .shots { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 12px 0 6px; }
+  .shots figure { margin: 0; display: flex; flex-direction: column; }
+  .shot-img { border: 1px solid #e7e5e4; border-radius: 6px; overflow: hidden; background: #fafafa; }
+  .shot-img img { display: block; width: 100%; }
+  .shot-img.tall { max-height: 720px; overflow-y: auto; }
+  .notes { list-style: none; margin-top: 10px; }
+  .notes li { display: grid; grid-template-columns: 22px 1fr; gap: 8px; font-size: 12.5px; line-height: 1.55; color: #44403c; padding: 5px 0; border-bottom: 1px solid #f5f5f4; }
+  .notes li:last-child { border-bottom: 0; }
+  .notes b { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 4px; background: #1c1917; color: #fff; font-size: 11px; font-weight: 700; }
+  .source { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .source figure { margin: 0; }
+  .quote { font-family: 'Lora', Georgia, serif; font-style: italic; font-size: 14px; line-height: 1.7; color: #44403c; border-left: 0; background: #fafafa; border: 1px solid #f0f0f0; border-radius: 6px; padding: 12px 14px; margin: 10px 0; }
+  .quote small { display: block; font-family: 'Montserrat', sans-serif; font-style: normal; font-size: 11px; color: #a8a29e; margin-top: 6px; }
+  @media (max-width: 720px) { .shots, .source { grid-template-columns: 1fr; } }
+
+  .callout { background: #fafafa; border: 1px solid #e7e5e4; border-radius: 8px; padding: 16px 20px; margin: 16px 0; max-width: 720px; }
+  .callout p { font-size: 14px; line-height: 1.7; color: #44403c; }
+  .status { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 12px 0 8px; }
+  .status .col { border: 1px solid #e7e5e4; border-radius: 8px; padding: 16px 18px; }
+  .status .col .head { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid #f5f5f4; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; }
+  .status .col .head .dot { width: 6px; height: 6px; border-radius: 99px; }
+  .status ul { list-style: none; padding: 0; }
+  .status li { font-size: 13.5px; line-height: 1.6; color: #44403c; padding: 6px 0; border-bottom: 1px solid #f5f5f4; }
+  .status li:last-child { border-bottom: 0; }
+  .status li b { font-weight: 600; color: #1c1917; }
+  .status li .when { font-size: 11px; color: #a8a29e; margin-left: 6px; white-space: nowrap; }
+
+  .method { border-top: 1px solid #f5f5f4; padding-top: 12px; margin-top: 28px; max-width: 720px; }
+  .method .h { font-size: 11px; font-weight: 600; color: #44403c; margin-bottom: 8px; }
+  .method .src-row { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 6px; }
+  .method .src-row .dot { width: 6px; height: 6px; border-radius: 99px; margin-top: 6px; flex-shrink: 0; }
+  .method .src-row span { font-size: 11px; color: #a8a29e; line-height: 1.6; }
+  .method .src-row b { font-weight: 600; color: #57534e; }
+  .footer { margin-top: 48px; padding-top: 24px; border-top: 1px solid #e7e5e4; text-align: center; }
+  .footer p { font-size: 12px; color: #a8a29e; }
+  .footer p + p { margin-top: 4px; }
+
+  body.editing [contenteditable="true"] { outline: 1px dashed #c4b5fd; outline-offset: 2px; border-radius: 2px; }
+  body.editing [contenteditable="true"]:hover { background: #f5f3ff; }
+  body.editing [contenteditable="true"]:focus { outline: 2px solid #7c3aed; background: #fff; }
+  .editbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; display: flex; align-items: center; gap: 14px; padding: 12px 20px; background: #0d0d0d; color: #fff; font-size: 13px; }
+  .editbar b { font-weight: 600; }
+  .editbar span { color: #d6d3d1; }
+  .editbar button { margin-left: auto; padding: 8px 14px; border: 0; border-radius: 4px; background: #fff; color: #0d0d0d; font: inherit; font-weight: 600; cursor: pointer; }
+  body.editing { padding-bottom: 64px; }
+
+  @media (max-width: 720px) {
+    .claim { grid-template-columns: 1fr; }
+    .claim .said { border-right: 0; border-bottom: 1px solid #f5f5f4; border-radius: 8px 8px 0 0; }
+    .status { grid-template-columns: 1fr; }
+  }
+  @media print { .tip { display: none; } @page { margin: 1.2cm 1.5cm; } body { print-color-adjust: exact; -webkit-print-color-adjust: exact; } .shot-img.tall { max-height: none; overflow: visible; } }
+</style></head>
+<body>
+
+<header class="s8-header">
+  <div class="rainbow"></div>
+  <div class="inner">
+    <img src="img/kari-mann-gbp/s8e8logo.png" alt="Studio Eighty Eight">
+    <div class="client"><b>Kari Mann Dental Studio</b><span>Internal note for Sophia · September 29, 2026</span></div>
+  </div>
+</header>
+
+<div class="container">
+
+  <div class="title-block">
+    <h1>Kari Mann: how to read the Google profile numbers</h1>
+    <p>Sophia, this is for you, not for the client. Kari sent the Performance screen from the practice's Google Business Profile showing 261 interactions for September, the lowest month on that chart, as one more sign the trend is heading the wrong way. Below is the full record from Google for that profile, what a Cape Coral searcher sees on Google today, what we control and what we don't, and how I would think about it before the call. It covers the Google profile only.</p>
+  </div>
+
+  <p class="executive-summary">The decline in profile interactions is real, and it is worth watching. It did not start this month or with the new website: it began in November 2025, and most of it is one thing, the profile being shown less often in regular mobile Google search results. Calls held up longer than views did and have been lower since May, which is the part we cannot fully explain yet. Views of the listing on Google Maps itself are flat to slightly up over the same period, and the share of people who see the profile and then call, click or ask for directions is higher than it was a year ago. September is also not finished: Google's data for the month ends on the 25th, and at the current daily pace the month lands near 320, level with February and June. One part of this is specific to the practice: the profile is being shown far less often for implant searches than it was a year ago, while searches for a dentist in Cape Coral held steady. That is where the SEO work is going.</p>
+
+  <h2 class="sec">What Kari said, and what the full record shows</h2>
+  <div class="claims">
+    <div class="claim">
+      <div class="said"><div class="lab">What Kari said</div><div class="q">"Profile interactions are lower this month than they have been all year, even lower than the month we switched domains."</div></div>
+      <div class="found">
+        <div class="lab">What the data shows</div>
+        <p><strong>The 261 is real but incomplete.</strong> Google's Business Profile data runs several days behind and revises the most recent two to three weeks. When we pulled the profile through Google's API on September 29, the last full day of data was September 25. Through that date the month had 267 interactions, 10.7 a day, which puts the full month near 320. February had 319 and June had 305. September is on the low side, not at a new low.</p>
+        <p><strong>The decline is older than the website.</strong> The chart on her screen starts in April. The full record below starts in April 2025. Interactions ran 430 to 555 a month through October 2025, stepped down in November 2025, and have run 305 to 467 since. The new website went live on May 29, 2026, six months after the step down. The month of the switch (June, 305) was the low point and the three months since have been higher: 344, 397, and September on pace for about 320.</p>
+        <p><strong>Calls are the part to watch.</strong> Views and website clicks stepped down in November 2025. Calls did not: they held between 104 and 156 a month from April 2025 through April 2026, and have run 81 to 99 a month since May. September has 57 through the 25th, 2.3 a day against 3.2 in August, including one week (September 14 to 20) with six calls. May is the month Google's core update rolled out and the new site launched, and from launch until September 29 the profile's website link pointed at the old address. We cannot yet separate those three. The link is corrected, and the map scans at two and four weeks will show whether the rankings respond.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="shots" style="grid-template-columns: 300px 1fr; margin-top: 16px;">
+    <figure>
+      <div class="fig-title">The screen Kari sent</div>
+      <div class="fig-sub">Business Profile Performance, Apr to Sep 2026</div>
+      <div class="shot-img"><img src="img/kari-mann-gbp/client-gbp-screenshot.jpg" alt="Google Business Profile performance screen showing 2,067 interactions April to September 2026 and 261 for September"></div>
+      <ol class="notes">
+        <li><b>1</b>Six months are shown, so "lowest all year" means lowest of these six. April to September is also the off season in Cape Coral.</li>
+        <li><b>2</b>September is plotted as if it were a full month next to five full months. Google does not mark it as partial.</li>
+      </ol>
+    </figure>
+    <figure>
+      <div class="fig-title">The same profile, every month Google has on record</div>
+      <div class="fig-sub">Interactions by type, April 2025 to September 2026. September is through the 25th, the last full day Google had reported when this was pulled.</div>
+      <div class="legend"><span><i style="background:#6d28d9"></i>Calls</span><span><i style="background:#be123c"></i>Website clicks</span><span><i style="background:#0369a1"></i>Direction requests</span><span><i class="line" style="background:#7c3aed"></i>Google ranking update</span></div>
+      <div class="chart" id="chart-interactions"></div>
+      <figcaption>The profile's history in Google's system starts in late March 2025, so April 2025 is the first full month available. Bookings and messages are zero throughout, so interactions are calls plus website clicks plus direction requests, the same three her Performance screen adds up. The step down happens between October and November 2025. The new site launched into the low point (June 2026) and the months since have been higher, not lower.</figcaption>
+      <details class="table"><summary>Show the monthly numbers</summary><div class="table-wrap"><table id="table-interactions"></table></div></details>
+    </figure>
+  </div>
+
+  <h2 class="sec">Where the drop actually is: shown less, not ignored more</h2>
+  <div class="prose">
+    <p>Google reports two different things for a profile. <strong>Impressions</strong> are how many times the profile was shown to someone, split by where it was shown: on Google Maps, or in a regular Google Search results page. <strong>Interactions</strong> are what people did after seeing it. Separating the two tells you whether the problem is visibility or the listing itself.</p>
+  </div>
+  <figure>
+    <div class="fig-title">Times the profile was shown, by surface</div>
+    <div class="fig-sub">Monthly impressions on Google Search versus Google Maps, April 2025 to September 2026 (September through the 25th)</div>
+    <div class="legend"><span><i class="line" style="background:#0e7490"></i>Shown in Google Search results</span><span><i class="line" style="background:#2F8F5B"></i>Shown on Google Maps</span></div>
+    <div class="chart" id="chart-impressions"></div>
+    <figcaption>Search impressions fell from 1,100 to 1,900 a month in 2025 to 490 to 800 a month in 2026, and mobile accounts for almost all of that loss (mobile impressions June to August: 3,569 in 2025, 1,799 in 2026). Maps impressions were 906 for June to August 2025 and 982 for the same months in 2026. The listing is being found on Maps as often as before. It is being shown less on the regular Google results page, and the next section shows why.</figcaption>
+    <details class="table"><summary>Show impressions, interactions and the rate each month</summary><div class="table-wrap"><table id="table-rate"></table></div></details>
+  </figure>
+  <div class="callout">
+    <p><strong>The people who do see the profile act on it more than last year.</strong> Interactions per 100 impressions ran 24 to 37 through 2025 and 34 to 56 in 2026. A listing that was getting worse would show the opposite: the same number of views with fewer people acting. What we see is fewer views on one surface, with the listing converting better than it did.</p>
+  </div>
+
+  <h2 class="sec">What a Cape Coral searcher sees on Google today</h2>
+  <div class="prose">
+    <p>The regular Google results page for a dental search looks different than it did a year ago. We ran the searches below on September 29, 2026 from a browser located in Cape Coral, on a phone and on a desktop, and captured the full page. Notes on each capture mark what sits above the map listings, how far down the page the map listings start, and whether the free map listings show a call button at all.</p>
+  </div>
+  <div class="shots" style="grid-template-columns: repeat(3, 1fr);">
+    <figure>
+      <div class="fig-title">"dental implants cape coral"</div>
+      <div class="fig-sub">Phone, September 29, 2026. Scroll inside the image to see the full capture.</div>
+      <div class="shot-img tall"><img src="img/kari-mann-gbp/serp-implants-mobile.jpg" alt="Google results on a phone for dental implants cape coral: four paid ads, then the map results with Kari Mann Dental Studio listed first"></div>
+      <ol class="notes">
+        <li><b>1</b>Four paid ads fill the first screen and a half. Two of the four are practices in Naples.</li>
+        <li><b>2</b>The map results start here, about a screen and a half down the page.</li>
+        <li><b>3</b>Kari Mann Dental Studio is the first map listing in this capture. There is no call button on it; a searcher has to tap into the listing to find the phone number.</li>
+        <li><b>4</b>The paid listing inside the map results is the only one with Call, Directions and Website buttons.</li>
+      </ol>
+    </figure>
+    <figure>
+      <div class="fig-title">"best dentist in cape coral"</div>
+      <div class="fig-sub">Phone, September 29, 2026</div>
+      <div class="shot-img tall"><img src="img/kari-mann-gbp/serp-best-dentist-mobile.jpg" alt="Google results on a phone for best dentist in cape coral: three paid ads, then map results with a paid listing first and Kari Mann Dental Studio second"></div>
+      <ol class="notes">
+        <li><b>1</b>Three paid ads sit above the map results.</li>
+        <li><b>2</b>The map results start just below the first screen.</li>
+        <li><b>3</b>A paid listing is placed first inside the map results, and it carries the only Call button.</li>
+        <li><b>4</b>Kari Mann Dental Studio is the first unpaid listing. No call button.</li>
+      </ol>
+    </figure>
+    <figure>
+      <div class="fig-title">"dr kari mann dentist cape coral"</div>
+      <div class="fig-sub">Phone, September 29, 2026, first screens</div>
+      <div class="shot-img tall"><img src="img/kari-mann-gbp/serp-name-search-mobile.jpg" alt="Google results on a phone for dr kari mann dentist cape coral: a competitor ad using the practice name as its headline"></div>
+      <ol class="notes">
+        <li><b>1</b>The first result is another practice's paid ad, and it uses "Kari mann dental studio" as its own headline.</li>
+        <li><b>2</b>That practice's phone number is offered before any result for Kari's practice appears.</li>
+      </ol>
+      <figcaption>A search for the exact practice name, "kari mann dental studio", showed no ads: the profile appeared first, with its Call, Directions and Website buttons. The ad is one for the Ads team to look at.</figcaption>
+    </figure>
+  </div>
+  <div class="callout">
+    <p><strong>What the ten captures had in common.</strong> We captured five searches on a phone and the same five on a desktop. No unpaid map listing showed a call button on any of them. A paid listing sat inside the map results on nine of the ten, and paid ads sat above the map results on eight of the ten. The implant searches carried the most advertising: four advertisers, against none to three on the general dentist searches.</p>
+    <p style="margin-top:10px"><strong>Where Call buttons do appear.</strong> Some searches show practice cards with Call, Website and Directions buttons near the top of the page. On the searches we captured, every one of those cards sat under the "Sponsored" label. On one search, "top dentist cape coral", Google also replaced the usual map results with an AI-written list of practices, and that list had no call buttons either.</p>
+    <p style="margin-top:10px"><strong>How to read these.</strong> The browser's location was set at the office, which is the most favorable spot to search from, and a single search is a snapshot. These captures are here to show how the page is laid out, not to measure rank. Rank is measured by the 65-point map scan.</p>
+  </div>
+
+  <h2 class="sec">This is happening across local search, not just to this profile</h2>
+  <div class="prose">
+    <p>Two independent research groups that track Google's local results across thousands of searches have documented the same pattern. The passages below are highlighted on the source pages so they can be checked.</p>
+  </div>
+  <div class="source">
+    <figure>
+      <div class="fig-title">Paid listings inside the map results</div>
+      <div class="fig-sub">Sterling Sky, "The State of Local SEO in 2026", June 26, 2026</div>
+      <div class="shot-img"><img src="img/kari-mann-gbp/src-sterlingsky-pack-ads-chart.jpg" alt="Sterling Sky chart: percent of keywords showing local pack ads, rising from about 3 percent in October 2025 to about 30 percent in January 2026"></div>
+      <div class="quote">"Back at the beginning of 2025, local pack ads were only visible on 1% of the reports we were running on mobile devices. Fast forward to December 2025, and now almost 22% of our reports are showing them. This is a massive increase."<small><a href="https://www.sterlingsky.ca/the-state-of-local-seo-in-2026/">sterlingsky.ca/the-state-of-local-seo-in-2026</a></small></div>
+      <figcaption>Their tracked share was about 3 percent in October 2025, 14 percent in November and 30 percent in January 2026, then eased to under 10 percent by May. The profile's views on Google Search went from 1,419 in October 2025 to 1,080 in November and 490 in February 2026, and have been recovering since June. The two lines move together in time. That is not proof of cause, but it is the change on Google's side that matches the month the numbers moved.</figcaption>
+    </figure>
+    <figure>
+      <div class="fig-title">Calls from profiles are falling even where rankings hold</div>
+      <div class="fig-sub">Sterling Sky with Jepto, 179 profiles across 34 firms, January 2024 to October 2025</div>
+      <div class="shot-img"><img src="img/kari-mann-gbp/src-sterlingsky-calls-chart.jpg" alt="Sterling Sky chart of call clicks by month across 179 business profiles, declining from 10,720 in January 2024 to 8,013 in October 2025"></div>
+      <div class="quote">"If you have a business profile that ranks really well, even if you don't see a drop in ranking, your calls from the business profile are going down over time."<small><a href="https://www.sterlingsky.ca/the-state-of-local-seo-in-2026/">sterlingsky.ca/the-state-of-local-seo-in-2026</a></small></div>
+      <figcaption>Across the profiles in this study, calls fell from 10,720 a month to 8,013, about 25 percent, over 22 months. The study covers law firms, not dentists; the same article notes Google made the same change to dental results earlier.</figcaption>
+    </figure>
+    <figure>
+      <div class="fig-title">Call buttons now appear on the paid listings only</div>
+      <div class="fig-sub">Whitespark, "17 Local Developments You Need to Know About from Q4 2025"</div>
+      <div class="shot-img"><img src="img/kari-mann-gbp/src-whitespark-call-buttons.jpg" alt="Whitespark article with the sentence about call buttons only showing on sponsored placements highlighted"></div>
+      <div class="quote">"...Google only showing call buttons on sponsored placements while they are totally absent from the local pack. The local businesses you're marketing may be experiencing a drop in calls as a result."<small><a href="https://whitespark.ca/blog/17-local-developments-you-need-to-know-about-from-q4-2025/">whitespark.ca/blog</a></small></div>
+      <figcaption>This is what the Cape Coral captures above show: on all ten, the only Call button in the map results belonged to the paid listing.</figcaption>
+    </figure>
+    <figure>
+      <div class="fig-title">Google's ranking updates in this period</div>
+      <div class="fig-sub">Google Search Status Dashboard, ranking history</div>
+      <div class="shot-img"><img src="img/kari-mann-gbp/src-google-status.jpg" alt="Google Search Status Dashboard listing the May 2026, March 2026 and December 2025 core updates and the September 2026 spam update"></div>
+      <figcaption>These are the dates marked on the charts above. The May 2026 core update began eight days before the new site launched. A spam update that began on September 24 was still rolling out when the search captures on this page were taken. Source: <a href="https://status.search.google.com/products/rGHU1u87FJnkP6W2GwMi/history">status.search.google.com</a>.</figcaption>
+    </figure>
+  </div>
+
+  <h2 class="sec">The part that is specific to the practice: implant searches</h2>
+  <div class="prose">
+    <p>Google also reports which searches caused the profile to be shown. Comparing January to August 2025 against January to August 2026, the general dentistry searches held and the implant and gum searches collapsed. Google shows counts under 15 only as "under 15".</p>
+  </div>
+  <figure>
+    <div class="fig-title">Searches that showed the profile, January to August, 2025 versus 2026</div>
+    <div class="fig-sub">Times the profile appeared for each search, from the Business Profile search terms report</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Search</th><th>Jan to Aug 2025</th><th>Jan to Aug 2026</th></tr></thead>
+        <tbody>
+          <tr><td>dentist cape coral</td><td>256</td><td class="ok">254</td></tr>
+          <tr><td>dentist</td><td>187</td><td class="ok">297</td></tr>
+          <tr><td>best dentist in cape coral</td><td>173</td><td class="ok">165</td></tr>
+          <tr><td>Practice name, all spellings combined</td><td>456</td><td class="ok">479</td></tr>
+          <tr><td>dental implants cape coral</td><td>244</td><td class="hi">32</td></tr>
+          <tr><td>dental implant cape coral</td><td>109</td><td class="hi">25</td></tr>
+          <tr><td>dental implants in cape coral</td><td>97</td><td class="hi">19</td></tr>
+          <tr><td>dental implants</td><td>75</td><td class="hi">under 15</td></tr>
+          <tr><td>periodontist cape coral</td><td>82</td><td class="hi">under 15</td></tr>
+          <tr><td>periodontics cape coral</td><td>41</td><td class="hi">none</td></tr>
+          <tr><td>dentist near me</td><td>113</td><td class="hi">under 15</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <figcaption>Every search with the word "implant" or "periodont" in it fell by 75 to 95 percent, while searches for a dentist by name or by city held or grew. The profile's settings do not explain this: it carries the Dental implants provider and Dental implants periodontist categories and lists implant services, and none of that changed. Implant searches are also the most heavily advertised dental searches: in the captures above the practice was the first map listing for "dental implants cape coral", but that listing sat a screen and a half down the page, under four ads. This is the one finding in the profile data that is specific to the practice, and it lines up with the goal of more implant and All-on-X patients, so it is where we are concentrating: the services named on the profile, and the map scans for implant searches specifically.</figcaption>
+  </figure>
+
+  <h2 class="sec">What we found and fixed on the profile</h2>
+  <div class="prose">
+    <p>We went through the profile's settings looking for anything that could be holding the listing back. It is well built: nine categories including Dental implants provider, 22 listed services, complete hours, and a 5.0 rating across 895 reviews. One item was ours to fix and is fixed: the website link. I would raise it with Kari ourselves instead of waiting for her to find it.</p>
+  </div>
+  <div class="status">
+    <div class="col">
+      <div class="head"><span class="dot" style="background:#047857"></span><span style="color:#047857">Done</span></div>
+      <ul>
+        <li><b>Profile website link corrected.</b> After the site launch the profile still linked to the old address (without "www"), which only reached the new site through a redirect. It now links directly to the new site, with a tag that lets us count visits from the profile separately from other Google visits.<span class="when">Sep 29</span></li>
+        <li><b>Profile services link corrected.</b> Same fix on the services link.<span class="when">Sep 29</span></li>
+        <li><b>Business Profile listings reviewed</b> and new photos added.<span class="when">September</span></li>
+      </ul>
+    </div>
+    <div class="col">
+      <div class="head"><span class="dot" style="background:#0369a1"></span><span style="color:#0369a1">Next</span></div>
+      <ul>
+        <li><b>All-on-X, implant-supported dentures, TeethXpress and gum grafting added to the profile's services.</b> The profile already lists 22 services, including dental implants, full mouth dental implants and periodontics. These four are the implant and gum treatments it does not yet name.</li>
+        <li><b>Map scan re-run at two and four weeks</b> after the link fix, on the same 65-point grid as the September review, so the effect is measured rather than assumed.</li>
+        <li><b>Full September profile numbers</b> reported once Google finalizes the month, mid-October.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2 class="sec">How I would think about it</h2>
+  <div class="prose">
+    <p><strong>Two different things are being called "the decline", and they need to stay separate.</strong> The first is how often the profile is shown on the regular Google results page. That fell in November 2025, it is happening across local search, and we can show why. The second is calls from the profile, which held until April and have been lower since May. We can describe that one accurately, but we cannot yet say what caused it. If the two get blended on the call, the part we can explain ends up sounding like an excuse for the part we can't.</p>
+    <p><strong>The profile is one door into the practice, not the whole building.</strong> Kari's own scoreboard is points of contact: the phone rings, or someone requests an appointment. Profile interactions are one source feeding that number. They are worth watching, but a change in this one source is not the same thing as a change in her total. Her tracking sheet is the right scoreboard, and this is one line on it.</p>
+    <p><strong>Every Call button on the results page belongs to someone who is paying.</strong> In all of our captures the only Call buttons were on paid placements, and the practice was not in any of them. The free map listing still shows the practice, its rating and a review, but a searcher has to tap into it to call. That is Google's layout, for every dentist in Cape Coral. Whether the practice should be in those paid spots is a question for the Ads side, not something the profile can solve.</p>
+    <p><strong>Where it matters to her goal, the practice ranks well.</strong> For "dental implants cape coral" the practice was first in the map results from the office, second on a desktop, and second on a separate phone check. The challenge on implant searches is what Google places above the map results, which is four advertisers.</p>
+    <p><strong>What we control and what we don't.</strong> We control how complete and accurate the profile is, where it links, which services it names, and the ranking work measured by the map scan. The practice controls the flow of new reviews. Nobody but Google controls the page layout, the ads above the map results, or the missing call buttons.</p>
+    <p><strong>What we do not know yet.</strong> Why calls stepped down in May. And whether rankings for the general searches moved this week: in two of today's single searches ("dentist cape coral" and "dentist near me") the practice did not appear in the map results, which does not match the September scan. Google is in the middle of a spam update that began September 24, and the profile's link changed the same day we searched, so single searches are especially unreliable right now. The map scan will answer it.</p>
+  </div>
+
+  <h2 class="sec">On the call: what I would say, and what I would avoid</h2>
+  <div class="status">
+    <div class="col">
+      <div class="head"><span class="dot" style="background:#047857"></span><span style="color:#047857">Say</span></div>
+      <ul>
+        <li><b>September is not finished.</b> Google's data ends on the 25th. At this pace the month lands near 320, level with February and June. We will bring the full month in mid-October.</li>
+        <li><b>The drop in views started in November 2025,</b> before we began and before the new site, and it matches the month paid listings started appearing inside the map results.</li>
+        <li><b>People who see the profile act on it more than they did last year.</b> The listing itself is not the weak point.</li>
+        <li><b>The practice shows at the top of the map results for implant searches.</b> What sits above them is paid.</li>
+        <li><b>Calls from the profile have been lower since May.</b> We are measuring that, not guessing at it.</li>
+        <li><b>We found the profile's website link pointing at the old address and corrected it on September 29.</b> We will re-run the map scan at two and four weeks to see the effect.</li>
+      </ul>
+    </div>
+    <div class="col">
+      <div class="head"><span class="dot" style="background:#be123c"></span><span style="color:#be123c">Avoid</span></div>
+      <ul>
+        <li><b>"Rankings are holding."</b> Not until the new scan is back.</li>
+        <li><b>Arguing that her 261 is wrong.</b> It is real. It is partial, and it is one source.</li>
+        <li><b>Promising a ranking, a date, or a number of calls.</b></li>
+        <li><b>Blaming the site launch, or clearing it.</b> May had three things happen at once and we cannot separate them yet.</li>
+        <li><b>Using any single search as proof,</b> hers or ours, in either direction.</li>
+        <li><b>"We will optimize the profile."</b> It is already built out. Say specifically what is being added.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2 class="sec">The one part that sits with the practice: reviews</h2>
+  <div class="prose">
+    <p>Google weighs recent reviews far more than the lifetime total. The practice has 895 reviews at 5.0 and a steady flow, which is worth protecting. Written reviews that mention the treatment and the area the patient came from, with a reply to each, are the ones Google shows under the listing. The implant capture above shows Google doing exactly that with one of theirs.</p>
+  </div>
+  <figure style="max-width:720px">
+    <div class="fig-title">Recent reviews count for more than the total</div>
+    <div class="fig-sub">Sterling Sky, study of 8,186 businesses in 200 cities, November 5, 2025</div>
+    <div class="shot-img"><img src="img/kari-mann-gbp/src-sterlingsky-reviews.jpg" alt="Sterling Sky article with the sentence about reviews this month mattering more than total reviews highlighted"></div>
+    <div class="quote">"The number of reviews you've gotten this month matters more than your total number of reviews. We have seen this one in action as well. We had a dental client who pulled in 60+ reviews a month and absolutely dominated the rankings. Then they stopped. For 18 days. Guess what happened? Their rankings fell off a cliff."<small><a href="https://www.sterlingsky.ca/what-gets-you-ranking-for-near-me-2025/">sterlingsky.ca/what-gets-you-ranking-for-near-me-2025</a></small></div>
+  </figure>
+
+  <div class="method">
+    <div class="h">How this was measured</div>
+    <div class="src-row"><span class="dot" style="background:#0369a1"></span><span><b>Business Profile numbers:</b> Google Business Profile Performance API, location 837371878889904501, daily metrics April 1, 2025 to September 26, 2026, pulled September 29, 2026. Monthly totals for April to August 2026 match the Performance screen Kari sent (390, 370, 305, 344, 397). Search terms from the same API's search keywords report, January to August of each year.</span></div>
+    <div class="src-row"><span class="dot" style="background:#0e7490"></span><span><b>Search result captures:</b> taken September 29, 2026 through a browser located in Cape Coral, Florida, on a phone-sized and a desktop-sized screen. The location was set at the office. Google personalizes results, so another person's screen can differ in detail; the order of the sections is what these captures are meant to show.</span></div>
+    <div class="src-row"><span class="dot" style="background:#7c3aed"></span><span><b>Google ranking updates</b> from Google's Search Status Dashboard: December 11 to 29, 2025; March 27 to April 8, 2026; May 21 to June 2, 2026.</span></div>
+    <div class="src-row"><span class="dot" style="background:#a8a29e"></span><span><b>Research cited:</b> Sterling Sky (Joy Hawkins), "The State of Local SEO in 2026" and "What Actually Gets You Ranking for Near Me in 2025"; Whitespark, "17 Local Developments You Need to Know About from Q4 2025". Each passage quoted on this page was captured from the source page on September 29, 2026.</span></div>
+  </div>
+
+  <div class="footer">
+    <p>Produced by Studio Eighty Eight's SEO Team</p>
+    <p>Internal. Not for distribution to the client · September 29, 2026</p>
+  </div>
+
+</div>
+
+<script>
+(function () {
+  const fmt = (n) => n.toLocaleString('en-US');
+  const NS = 'http://www.w3.org/2000/svg';
+  const mk = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; };
+  const niceMax = (v) => { const p = Math.pow(10, Math.floor(Math.log10(v))); const f = v / p; const n = f <= 1 ? 1 : f <= 2 ? 2 : f <= 2.5 ? 2.5 : f <= 5 ? 5 : 10; return n * p; };
+  function tooltip(host) {
+    const t = document.createElement('div'); t.className = 'tip'; host.appendChild(t);
+    return { show(html, x, y) { t.innerHTML = html; t.style.left = x + 'px'; t.style.top = y + 'px'; t.classList.add('show'); }, hide() { t.classList.remove('show'); } };
+  }
+
+  function stackedColumns(hostId, labels, series, opts) {
+    const host = document.getElementById(hostId);
+    const W = 1080, H = 300, padL = 52, padR = 16, padT = 26, padB = 34;
+    const svg = mk('svg', { viewBox: '0 0 ' + W + ' ' + H, role: 'img', 'aria-label': opts.aria }, host);
+    const totals = labels.map((_, i) => series.reduce((s, sr) => s + (sr.values[i] || 0), 0));
+    const yMax = opts.yMax || niceMax(Math.max(...totals) * 1.08);
+    const plotW = W - padL - padR, plotH = H - padT - padB;
+    const y = (v) => padT + plotH - (v / yMax) * plotH;
+    const band = plotW / labels.length;
+    const barW = Math.min(28, band * 0.62);
+    for (let i = 0; i <= 4; i++) {
+      const v = (yMax / 4) * i;
+      mk('line', { x1: padL, x2: W - padR, y1: y(v), y2: y(v), class: i === 0 ? 'axis' : 'grid' }, svg);
+      mk('text', { x: padL - 8, y: y(v) + 4, 'text-anchor': 'end', class: 'tick' }, svg).textContent = fmt(v);
+    }
+    const tip = tooltip(host);
+    labels.forEach((lab, i) => {
+      const cx = padL + band * i + band / 2;
+      let acc = 0;
+      series.forEach((sr) => {
+        const v = sr.values[i] || 0; if (v <= 0) return;
+        const top = y(acc + v), bottom = y(acc);
+        const h = Math.max(0, bottom - top - (acc > 0 ? 2 : 0));
+        const r = mk('rect', { x: cx - barW / 2, y: top, width: barW, height: h, fill: sr.color }, svg);
+        if (opts.partial && opts.partial.has(i)) r.setAttribute('opacity', '0.45');
+        acc += v;
+      });
+      if (opts.labelTotals && opts.labelTotals.has(i)) mk('text', { x: cx, y: y(totals[i]) - 6, 'text-anchor': 'middle', class: 'dlabel' }, svg).textContent = fmt(totals[i]);
+      mk('text', { x: cx, y: H - padB + 18, 'text-anchor': 'middle', class: 'tick' }, svg).textContent = lab;
+      const hit = mk('rect', { x: padL + band * i, y: padT, width: band, height: plotH, fill: 'transparent' }, svg);
+      hit.addEventListener('mousemove', (e) => {
+        const rect = host.getBoundingClientRect();
+        const parts = series.map((sr) => sr.name + ': <b>' + fmt(sr.values[i] || 0) + '</b>');
+        tip.show('<b>' + opts.full[i] + '</b><br>' + parts.join('<br>') + '<br>Total: <b>' + fmt(totals[i]) + '</b>', e.clientX - rect.left, e.clientY - rect.top);
+      });
+      hit.addEventListener('mouseleave', tip.hide);
+    });
+    (opts.markers || []).forEach((m) => {
+      const x = padL + band * m.at;
+      mk('line', { x1: x, x2: x, y1: padT - 4 + (m.dy || 0), y2: padT + plotH, class: 'marker' + (m.cls ? ' ' + m.cls : '') }, svg);
+      const anchor = m.left ? 'end' : 'start';
+      mk('text', { x: x + (m.left ? -6 : 6), y: padT + 6 + (m.dy || 0), class: 'marker-text' + (m.cls ? ' ' + m.cls : ''), 'text-anchor': anchor }, svg).textContent = m.text;
+    });
+  }
+
+  function lines(hostId, labels, series, opts) {
+    const host = document.getElementById(hostId);
+    const W = 1080, H = 260, padL = 48, padR = 24, padT = 22, padB = 34;
+    const svg = mk('svg', { viewBox: '0 0 ' + W + ' ' + H, role: 'img', 'aria-label': opts.aria }, host);
+    const all = series.flatMap((s) => s.values);
+    const yMax = opts.yMax || niceMax(Math.max(...all) * 1.1);
+    const plotW = W - padL - padR, plotH = H - padT - padB;
+    const y = (v) => padT + plotH - (v / yMax) * plotH;
+    const x = (i) => padL + (plotW / (labels.length - 1)) * i;
+    for (let i = 0; i <= 4; i++) {
+      const v = (yMax / 4) * i;
+      mk('line', { x1: padL, x2: W - padR, y1: y(v), y2: y(v), class: i === 0 ? 'axis' : 'grid' }, svg);
+      mk('text', { x: padL - 8, y: y(v) + 4, 'text-anchor': 'end', class: 'tick' }, svg).textContent = fmt(v);
+    }
+    labels.forEach((lab, i) => mk('text', { x: x(i), y: H - padB + 18, 'text-anchor': 'middle', class: 'tick' }, svg).textContent = lab);
+    series.forEach((sr) => {
+      const d = sr.values.map((v, i) => (i === 0 ? 'M' : 'L') + x(i) + ' ' + y(v)).join(' ');
+      mk('path', { d, fill: 'none', stroke: sr.color, 'stroke-width': 2, 'stroke-linejoin': 'round', 'stroke-linecap': 'round' }, svg);
+      sr.values.forEach((v, i) => { const c = mk('circle', { cx: x(i), cy: y(v), r: 4.5, fill: sr.color, stroke: '#fff', 'stroke-width': 2 }, svg); if (opts.partial && opts.partial.has(i)) c.setAttribute('opacity', '0.45'); });
+    });
+    (opts.markers || []).forEach((m) => {
+      const mx = x(m.at);
+      mk('line', { x1: mx, x2: mx, y1: padT - 4 + (m.dy || 0), y2: padT + plotH, class: 'marker' + (m.cls ? ' ' + m.cls : '') }, svg);
+      mk('text', { x: mx + (m.left ? -6 : 6), y: padT + 6 + (m.dy || 0), class: 'marker-text' + (m.cls ? ' ' + m.cls : ''), 'text-anchor': m.left ? 'end' : 'start' }, svg).textContent = m.text;
+    });
+    const tip = tooltip(host);
+    const band = plotW / (labels.length - 1);
+    labels.forEach((lab, i) => {
+      const hit = mk('rect', { x: x(i) - band / 2, y: padT, width: band, height: plotH, fill: 'transparent' }, svg);
+      hit.addEventListener('mousemove', (e) => {
+        const rect = host.getBoundingClientRect();
+        tip.show('<b>' + (opts.full ? opts.full[i] : lab) + '</b><br>' + series.map((s) => s.name + ': <b>' + fmt(s.values[i]) + '</b>').join('<br>'), e.clientX - rect.left, e.clientY - rect.top);
+      });
+      hit.addEventListener('mouseleave', tip.hide);
+    });
+  }
+
+  function table(id, head, rows) {
+    document.getElementById(id).innerHTML = '<thead><tr>' + head.map((h) => '<th>' + h + '</th>').join('') + '</tr></thead><tbody>' +
+      rows.map((r) => '<tr>' + r.map((c, i) => '<td>' + (typeof c === 'number' ? fmt(c) : c) + '</td>').join('') + '</tr>').join('') + '</tbody>';
+  }
+
+  // Google Business Profile Performance API, location 837371878889904501, pulled Sep 29 2026. Sep 2026 = Sep 1 to 26 (26th partial).
+  const labels = ['Apr 25','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan 26','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep 1-25'];
+  const full = ['April 2025','May 2025','June 2025','July 2025','August 2025','September 2025','October 2025','November 2025','December 2025','January 2026','February 2026','March 2026','April 2026','May 2026','June 2026','July 2026','August 2026','September 1 to 25, 2026'];
+  const calls = [104,128,99,151,113,121,156,148,129,125,105,119,119,89,91,81,99,57];
+  const web   = [246,309,224,261,257,219,219,183,178,206,146,207,158,169,131,156,177,125];
+  const dirs  = [116,118,111,117,77,109,145,102,109,136,68,131,113,112,83,107,121,89];
+  const search= [1387,1878,1325,1106,1588,1514,1419,1080,866,795,490,551,521,486,552,660,797,632];
+  const maps  = [442,286,277,317,312,285,309,239,295,317,288,268,289,214,352,328,302,291];
+  const inter = calls.map((c, i) => c + web[i] + dirs[i]);
+  const imps  = search.map((s, i) => s + maps[i]);
+  const markers = [
+    { at: 8 + 11 / 31, text: 'Core update Dec 11 to 29', cls: 'update' },
+    { at: 11 + 27 / 31, text: 'Core update Mar 27 to Apr 8', cls: 'update', dy: 16 },
+    { at: 13 + 21 / 31, text: 'Core update May 21 to Jun 2', cls: 'update', dy: 32 },
+    { at: 13 + 29 / 31, text: 'New site live May 29', dy: 48 },
+    { at: 17 + 29 / 30, text: 'Profile link fixed Sep 29', dy: 64, left: true }
+  ];
+
+  stackedColumns('chart-interactions', labels, [
+    { name: 'Calls', color: '#6d28d9', values: calls },
+    { name: 'Website clicks', color: '#be123c', values: web },
+    { name: 'Direction requests', color: '#0369a1', values: dirs }
+  ], { full, partial: new Set([17]), labelTotals: new Set([1, 6, 7, 13, 14, 16, 17]), markers, aria: 'Monthly Google Business Profile interactions, April 2025 to September 2026' });
+  table('table-interactions', ['Month', 'Calls', 'Website clicks', 'Directions', 'Total', 'Per day'],
+    full.map((m, i) => [m, calls[i], web[i], dirs[i], inter[i], (inter[i] / (i === 17 ? 25 : [30,31,30,31,31,30,31,30,31,31,28,31,30,31,30,31,31][i])).toFixed(1)]));
+
+  lines('chart-impressions', labels, [
+    { name: 'Google Search', color: '#0e7490', values: search },
+    { name: 'Google Maps', color: '#2F8F5B', values: maps }
+  ], { full, yMax: 2000, partial: new Set([17]), markers: markers.map((m) => Object.assign({}, m, { at: Math.min(m.at, labels.length - 1) })), aria: 'Monthly profile impressions on Google Search and Google Maps, April 2025 to September 2026' });
+  table('table-rate', ['Month', 'Shown in Search', 'Shown on Maps', 'Total shown', 'Interactions', 'Per 100 shown'],
+    full.map((m, i) => [m, search[i], maps[i], imps[i], inter[i], Math.round(inter[i] / imps[i] * 100)]));
+})();
+</script>
+<script>
+// Edit mode. Open the page with ?edit=1, click any text to change it, then download the updated file
+// and upload it to the s8e8-mockups repo on GitHub (Add file > Upload files). Pages redeploys in about a minute.
+(function () {
+  if (!/[?&]edit=1/.test(location.search)) return;
+  const EDITABLE = '.container h1, .container h2, .container h3, .container p, .container figcaption, .container li, .container .fig-title, .container .fig-sub, .container .lbl, .container .val, .container .note, .container .said > div, .container th, .container td, .container .quote, .container .legend span, .container .src-row > span:last-child, .container .footer p, header .client';
+  document.body.classList.add('editing');
+  document.querySelectorAll(EDITABLE).forEach((el) => { if (!el.closest('.chart') && !el.closest('#table-interactions') && !el.closest('#table-rate')) el.setAttribute('contenteditable', 'true'); });
+  const bar = document.createElement('div');
+  bar.className = 'editbar';
+  bar.innerHTML = '<b>Editing</b><span>Click any text on the page to change it. When you are done, download the page and upload it to the s8e8-mockups repo on GitHub, or send the file to Claude to push.</span><button type="button">Download updated page</button>';
+  document.body.appendChild(bar);
+  bar.querySelector('button').addEventListener('click', () => {
+    const clone = document.documentElement.cloneNode(true);
+    clone.querySelector('body').classList.remove('editing');
+    clone.querySelectorAll('[contenteditable]').forEach((el) => el.removeAttribute('contenteditable'));
+    clone.querySelectorAll('.editbar').forEach((el) => el.remove());
+    clone.querySelectorAll('.chart, #table-interactions, #table-rate').forEach((el) => { el.innerHTML = ''; });
+    const html = '<!DOCTYPE html>\n' + clone.outerHTML + '\n';
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([html], { type: 'text/html' }));
+    a.download = 'kari-mann-gbp-notes.html';
+    document.body.appendChild(a); a.click(); a.remove();
+  });
+})();
+</script>
+</body></html>
