@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<meta name="color-scheme" content="light">
+<title>Do Reviews Move Calls? | S8E8 internal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&amp;family=Lora:ital@1&amp;display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { font-family: 'Montserrat', -apple-system, sans-serif; background: #fff; color: #1c1917; -webkit-font-smoothing: antialiased; }
+  img { max-width: 100%; }
+  a { color: #0f766e; }
+  .s8-header { background: #0d0d0d; }
+  .s8-header .rainbow { height: 3px; background: linear-gradient(90deg, #ff6b6b, #ffd93d, #6bcb77, #4d96ff, #c77dff); }
+  .s8-header .inner { max-width: 1152px; margin: 0 auto; padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .s8-header img { height: 32px; width: auto; flex-shrink: 0; }
+  .s8-header .client { text-align: right; }
+  .s8-header .client b { display: block; font-size: 14px; font-weight: 600; color: #fff; }
+  .s8-header .client span { display: block; font-size: 12px; color: #78716c; margin-top: 2px; }
+  .container { max-width: 1152px; margin: 0 auto; padding: 32px 24px 64px; }
+  @media (max-width: 640px) { .container { padding: 24px 16px 48px; } }
+  .title-block { margin-bottom: 24px; max-width: 720px; }
+  .title-block h1 { font-size: 20px; font-weight: 700; line-height: 1.3; }
+  .title-block p { font-size: 14px; color: #78716c; margin-top: 4px; }
+  .prose { max-width: 720px; }
+  .prose p { font-size: 14px; line-height: 1.75; color: #44403c; margin-bottom: 14px; }
+  .prose ul { padding-left: 18px; margin-bottom: 14px; }
+  .prose li { font-size: 14px; line-height: 1.7; color: #44403c; margin-bottom: 5px; }
+  .prose strong { font-weight: 600; color: #1c1917; }
+  .executive-summary { font-size: 15px; font-style: italic; font-family: 'Lora', Georgia, serif; color: #57534e; line-height: 1.8; max-width: 720px; margin-bottom: 8px; }
+  h2.sec { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #a8a29e; margin: 40px 0 12px; }
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; max-width: 900px; margin: 16px 0 8px; }
+  .tile { border: 1px solid #e7e5e4; border-radius: 6px; padding: 14px 16px; }
+  .tile .k { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #a8a29e; }
+  .tile .v { font-size: 22px; font-weight: 700; margin-top: 4px; font-variant-numeric: tabular-nums; }
+  .tile .n { font-size: 12px; color: #78716c; margin-top: 2px; line-height: 1.4; }
+  .table-wrap { overflow-x: auto; max-width: 900px; }
+  table { border-collapse: collapse; width: 100%; margin: 8px 0 16px; font-variant-numeric: tabular-nums; font-size: 13px; }
+  th, td { padding: 8px 10px; border-bottom: 1px solid #e7e5e4; text-align: right; vertical-align: top; }
+  th:first-child, td:first-child { text-align: left; }
+  th { font-weight: 700; color: #a8a29e; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; }
+  td.note { color: #78716c; font-size: 12px; text-align: left; }
+  .caption { font-size: 12px; color: #78716c; line-height: 1.6; max-width: 720px; }
+</style>
+</head>
+<body>
+<header class="s8-header">
+  <div class="rainbow"></div>
+  <div class="inner">
+    <img src="img/kari-mann-gbp/s8e8logo.png" alt="Studio Eighty Eight">
+    <div class="client"><b>Reviews and profile calls</b><span>Internal study · September 29, 2026</span></div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="title-block">
+    <h1>Do new Google reviews go with more profile calls?</h1>
+    <p>38 single-location clients, November 2024 to August 2026. Google Business Profile metrics only.</p>
+  </div>
+
+  <p class="executive-summary">No reliable link. Month to month, a practice's new reviews do not move with its calls, in either direction. Over a full summer there is a small positive hint that could also be chance. Replies show nothing either way. This is a correlation study, so even the hint would not show that reviews cause calls.</p>
+
+  <div class="tiles">
+    <div class="tile"><div class="k">Practices</div><div class="v">38</div><div class="n">single-location clients with a full profile record</div></div>
+    <div class="tile"><div class="k">New reviews counted</div><div class="v">4,621</div><div class="n">by the date each review was written</div></div>
+    <div class="tile"><div class="k">Practice-months</div><div class="v">749</div><div class="n">with complete call data</div></div>
+    <div class="tile"><div class="k">Typical month</div><div class="v">3 · 73</div><div class="n">median new reviews · median calls</div></div>
+  </div>
+
+  <h2 class="sec">How it was tested</h2>
+  <div class="prose">
+    <p>Each practice is compared with itself. A month counts as "busy" only against that practice's own usual level, so a large practice and a small one sit on the same scale.</p>
+    <p>Each month is also compared with how all 38 practices moved that same month. That takes out the November 2025 step down, the seasons, and anything else Google changed for everyone, without picking dates by hand.</p>
+    <p>Calls were chosen as the main measure before looking at any results. The ranges below come from resampling whole practices 2,000 times: if the range runs from below zero to above zero, the data cannot tell a link from no link.</p>
+  </div>
+
+  <h2 class="sec">Result 1 · Month to month: nothing</h2>
+  <div class="table-wrap">
+  <table>
+    <tr><th>Timing</th><th>Calls, if reviews double</th><th>Likely range</th><th>Correlation</th></tr>
+    <tr><td>Same month</td><td>+1.5%</td><td>−1.7% to +5.1%</td><td>0.05</td></tr>
+    <tr><td>Reviews this month, calls next month</td><td>−0.5%</td><td>−3.3% to +2.6%</td><td>−0.02</td></tr>
+    <tr><td>Calls this month, reviews next month</td><td>not a calls effect</td><td>−0.06 to 0.11 (correlation)</td><td>0.03</td></tr>
+  </table>
+  </div>
+  <div class="prose">
+    <p>A month with twice a practice's usual reviews goes with about the same calls as any other month. The ranges rule out a large month-to-month effect: at most about 5 percent more calls.</p>
+    <p><strong>A limit worth knowing.</strong> Single months are noisy. Website clicks and calls, which should move together, only register a correlation of 0.10 with the same method, and direction requests and calls register 0.00. So "nothing month to month" means any effect is too small to see at this scale. It does not prove there is none.</p>
+  </div>
+
+  <h2 class="sec">Result 2 · Summer to summer: a small hint</h2>
+  <div class="table-wrap">
+  <table>
+    <tr><th>June to August, 2025 vs 2026</th><th>Practices</th><th>Median change in calls</th></tr>
+    <tr><td>New reviews went up</td><td>21</td><td>+6.1%</td></tr>
+    <tr><td>New reviews went down or stayed flat</td><td>17</td><td>−6.6%</td></tr>
+  </table>
+  </div>
+  <div class="prose">
+    <p>Practices that earned more reviews this summer than last also tended to hold or grow calls. The correlation is 0.23, with a likely range of −0.06 to 0.52, so it could still be chance. Using April to August instead gives 0.22, with a range of 0.01 to 0.46, just above zero.</p>
+    <p>Two things keep this a hint, not a finding:</p>
+    <ul>
+      <li>It does not grow with the size of the change. The 13 practices whose reviews rose the most had a median calls change of +3.6 percent, smaller than the middle group's +8.0 percent.</li>
+      <li>It cannot tell direction. A practice that got busier in 2026 would see more patients, more reviews and more calls all at once.</li>
+    </ul>
+  </div>
+
+  <h2 class="sec">Result 3 · Replies: nothing</h2>
+  <div class="prose">
+    <p>Replies were tested three ways against calls: the share of that month's new reviews answered, how many days a reply took, and whether any reply went out that month. None registered at any timing (correlations between −0.08 and 0.03, every range crossing zero).</p>
+    <p>There is also little to test. 13 of the 38 practices answer the same share of reviews every month: some answer all of them, some answer none. Six practices changed their reply habit sharply during the period. Their calls went both up and down afterwards, too few to read anything from.</p>
+  </div>
+
+  <h2 class="sec">What this means for Kari Mann</h2>
+  <div class="prose">
+    <p>Her new reviews fell from 18 in August 2026 to 5 in September 1 to 24, the same month her calls dipped. Across our clients, a month with fewer reviews does not reliably come with fewer calls, so the September review dip is not evidence about her calls.</p>
+    <p>Over the summer, her new reviews fell from 52 to 41 and her calls from 363 to 271 (down 25 percent). 17 of our practices earned fewer reviews this summer than last. Their calls ranged from 45 percent down to 61 percent up, and seven of them grew calls. Kari Mann's 25 percent drop was the third largest of the 17. Fewer reviews did not decide which way calls went.</p>
+    <p>This does not argue against asking for reviews. Reviews also show on the profile and in what people read before they call, and this study only measures calls, clicks, directions and views.</p>
+  </div>
+
+  <h2 class="sec">Secondary measures</h2>
+  <div class="prose">
+    <p>Website clicks, direction requests and views (April 2025 onward) show the same pattern: small, uncertain, mostly crossing zero. One timing stood out: direction requests one month went with slightly more reviews the next month (correlation 0.07, range 0.01 to 0.14). That fits "people who visit leave reviews". But 30 tests were run, and one of them landing just above zero is what chance alone would produce.</p>
+  </div>
+
+  <h2 class="sec">How this was measured</h2>
+  <div class="prose">
+    <ul>
+      <li><strong>Reviews and replies:</strong> every review on each profile, pulled from Google on September 29, 2026, counted in the month it was written. Reviews Google removed, or that reviewers deleted, cannot be seen. A reply's date is its last edit, so an edited reply looks slower than it was.</li>
+      <li><strong>Calls:</strong> Google's Performance API from April 2025, and our stored daily copy of the same numbers for earlier months (the API only reaches back about 18 months). Both sources give Kari Mann 363 calls in summer 2025 and 271 in summer 2026, matching her profile.</li>
+      <li><strong>Practices:</strong> single-location clients with call data for every day of June to August in both years. Multi-location clients were left out for now. Two archived clients and four with placeholder zero months were dropped.</li>
+      <li><strong>Window:</strong> November 2024 to August 2026. September 2026 is left out because it is not finished and Google revises the most recent weeks.</li>
+      <li><strong>Search terms</strong> were left out, as agreed: Google reports them only by month and hides terms under 15 searches.</li>
+    </ul>
+  </div>
+</div>
+</body></html>
