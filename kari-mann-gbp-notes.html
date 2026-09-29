@@ -146,6 +146,15 @@
     .status { grid-template-columns: 1fr; }
   }
   @media print { .tip { display: none; } @page { margin: 1.2cm 1.5cm; } body { print-color-adjust: exact; -webkit-print-color-adjust: exact; } .shot-img.tall { max-height: none; overflow: visible; } }
+  details.ev { border-top: 1px solid #e7e5e4; padding: 14px 0; }
+  details.ev:last-of-type { border-bottom: 1px solid #e7e5e4; }
+  details.ev > summary { cursor: pointer; font-size: 14px; font-weight: 600; color: #1c1917; list-style: none; }
+  details.ev > summary::-webkit-details-marker { display: none; }
+  details.ev > summary::before { content: "+"; display: inline-block; width: 18px; color: #0f766e; font-weight: 700; }
+  details.ev[open] > summary::before { content: "\2212"; }
+  details.ev[open] > summary { margin-bottom: 8px; }
+  details.ev h2.ev-h { display: none; }
+  .ev-intro { font-size: 13px; color: #78716c; margin-bottom: 8px; }
 </style></head>
 <body>
 
@@ -161,12 +170,90 @@
 
   <div class="title-block">
     <h1>Kari Mann: how to read the Google profile numbers</h1>
-    <p>Sophia, this is for you, not for the client. Kari sent the Performance screen from the practice's Google Business Profile showing 261 interactions for September, the lowest month on that chart, as one more sign the trend is heading the wrong way. Below is the full record from Google for that profile, what a Cape Coral searcher sees on Google today, what we control and what we don't, and how I would think about it before the call. It covers the Google profile only.</p>
+    <p>Sophia, this is for you, not for the client. Kari sent her Google profile's Performance screen showing 261 interactions for September. The top of this page is what you need for the call. The evidence behind each point is further down: open any section to see it.</p>
   </div>
 
-  <p class="executive-summary">The decline in profile interactions is real, and it is worth watching. It did not start this month or with the new website: it began in November 2025, and most of it is one thing, the profile being shown less often in regular mobile Google search results. Calls held up longer than views did and have been lower since May, which is the part we cannot fully explain yet. Views of the listing on Google Maps itself are flat to slightly up over the same period. September is also not finished: Google's data for the month ends on the 25th, and at the current daily pace the month lands near 320, level with February and June. One part of this is specific to the practice: implant searches. Those searches faded in the fall of 2025 and have started to return since the new site launched.</p>
+  <h2 class="sec">The short version</h2>
+  <div class="prose">
+    <ul>
+      <li><strong>September is not finished.</strong> Google's data ends on the 25th. At the current pace the month lands near 320, level with February (319) and June (305).</li>
+      <li><strong>The drop in views started in November 2025,</strong> before we began and before the new site. It is mostly the profile being shown less on the regular Google results page on phones. Views on Google Maps are flat.</li>
+      <li><strong>Calls are the part to watch.</strong> They held at 104 to 156 a month through April 2026 and have run 81 to 99 a month since May. We do not know why, so we should not name a cause.</li>
+      <li><strong>Implant searches are coming back.</strong> From November 2025 to June 2026 no implant search reached 15 a month. July 2026 had 76.</li>
+      <li><strong>This is not "bad for everyone".</strong> Of 38 of our single-location practices, 13 grew their profile calls this summer. Kari's fell 25 percent; the typical practice fell about 9 percent.</li>
+    </ul>
+  </div>
 
-  <h2 class="sec">What Kari said, and what the full record shows</h2>
+  <h2 class="sec">My recommendation: give the priority services their own section on the homepage</h2>
+  <div class="prose">
+    <p><strong>The ask.</strong> Sophia, I would like you to request this from the dev and design team: a section on the homepage where each of Kari's priority services gets its own block, with the service name, a short description of two or three sentences, and a link to that service's page.</p>
+    <p><strong>Why it matters.</strong> The homepage is one of the main pages the Google profile sends people to directly. The Website button on the profile opens the homepage, and 131, 156 and 177 people tapped it in June, July and August. For those visitors the homepage is the first thing they see of the practice after the profile. It is also the page Google reads when it decides what the profile is about. Sterling Sky's testing on that point: "The content on the specific URL you link to is important and impacts ranking in the local results."</p>
+    <p><strong>What is there now.</strong> The homepage's main heading is "Family &amp; Cosmetic Dentist in Cape Coral, FL". The only section that touches on services is the one below, called "Smiles": one paragraph and three buttons. Outside the menu, the words "dental implants" do not appear anywhere in the homepage's text. All-on-X appears three times: in Dr. Mann's title, in one sentence, and on a button. Emergency care, sedation and veneers are not mentioned at all. In my opinion that is not sufficient for a practice whose goal is more implant and All-on-X patients.</p>
+  </div>
+  <figure style="max-width:720px">
+    <div class="fig-title">The only services section on the homepage today</div>
+    <div class="fig-sub">karimanndentalstudio.com, September 29, 2026. The patient photos beside it are left out here.</div>
+    <div class="shot-img"><img src="img/kari-mann-gbp/homepage-smiles-section.jpg" alt="The Smiles section of the homepage: one paragraph about the practice's services and three buttons labeled Services, All-on-X and Same Day Crowns"></div>
+  </figure>
+  <div class="prose">
+    <p><strong>Which services.</strong> Confirm the list with Kari, since she knows which services she wants to grow. From what she has told us, the starting list is dental implants, All-on-X and full mouth implants, and implant-supported dentures, plus the general dentistry services she wants to keep building so that side does not fall behind.</p>
+    <p><strong>How we will know it helped.</strong> In the same profile numbers as everything else on this page: implant searches that showed the profile, and calls and website clicks from the profile, month by month. No promise on timing.</p>
+  </div>
+
+  <h2 class="sec">On the call: what I would say, and what I would avoid</h2>
+  <div class="status">
+    <div class="col">
+      <div class="head"><span class="dot" style="background:#047857"></span><span style="color:#047857">Say</span></div>
+      <ul>
+        <li><b>September is not finished.</b> Google's data ends on the 25th. At this pace the month lands near 320, level with February and June. We will bring the full month in mid-October.</li>
+        <li><b>The drop in views started in November 2025,</b> before we began and before the new site, and it matches the month paid listings started appearing inside the map results.</li>
+        <li><b>Calls from the profile have been lower since May.</b> We are measuring that, not guessing at it.</li>
+        <li><b>Implant searches are showing the profile again.</b> They faded in November 2025, and July 2026 was the strongest month on record outside one spike.</li>
+        <li><b>We will report the same five profile numbers every month,</b> so the trend she is tracking is measured the same way each time.</li>
+        <li><b>We are giving her priority services their own section on the homepage,</b> because that is the page her Google profile sends people to. Say this once dev and design have confirmed it.</li>
+      </ul>
+    </div>
+    <div class="col">
+      <div class="head"><span class="dot" style="background:#be123c"></span><span style="color:#be123c">Avoid</span></div>
+      <ul>
+        <li><b>Arguing that her 261 is wrong.</b> It is real. It is partial, and it is one source.</li>
+        <li><b>Promising a date or a number of calls.</b></li>
+        <li><b>Naming a cause for the May change in calls.</b> We do not have one we can support.</li>
+        <li><b>"It is bad for everyone."</b> A third of our practices grew their profile calls this year.</li>
+        <li><b>Using any single search as proof,</b> hers or ours, in either direction.</li>
+        <li><b>"We will optimize the profile."</b> It is already built out. Say specifically what is being added.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2 class="sec">The profile itself</h2>
+  <div class="prose">
+    <p>We went through the profile's settings. It is well built: nine categories including Dental implants provider, 23 listed services each with its own description, complete hours, and a 5.0 rating across 895 reviews. The services already include dental implants, implant-supported dentures, All-on-Four, TeethXPress, gum grafting and bone grafting.</p>
+  </div>
+  <div class="status">
+    <div class="col">
+      <div class="head"><span class="dot" style="background:#047857"></span><span style="color:#047857">Done</span></div>
+      <ul>
+        <li><b>Profile website and services links updated,</b> with a tag that lets us count visits from the profile separately from other Google visits.<span class="when">Sep 29</span></li>
+        <li><b>Business Profile listings reviewed</b> and new photos added.<span class="when">September</span></li>
+      </ul>
+    </div>
+    <div class="col">
+      <div class="head"><span class="dot" style="background:#0369a1"></span><span style="color:#0369a1">Next</span></div>
+      <ul>
+        <li><b>The priority services still missing from the profile get added:</b> All-on-X by that name, full mouth dental implants, zirconia fixed bridges, full mouth reconstruction and emergency dentistry. The descriptions are written and ready to enter.</li>
+        <li><b>Full September profile numbers</b> reported once Google finalizes the month, mid-October.</li>
+        <li><b>The same five profile numbers every month:</b> calls, website clicks, direction requests, views on Search and on Maps, and implant searches that showed the profile.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2 class="sec">The evidence</h2>
+  <p class="ev-intro">Each section opens with a click.</p>
+
+  <details class="ev">
+    <summary>What Kari's screen shows, and where the drop is</summary>
+  <h2 class="sec ev-h">What Kari said, and what the full record shows</h2>
   <div class="claims">
     <div class="claim">
       <div class="said"><div class="lab">What Kari said</div><div class="q">"Profile interactions are lower this month than they have been all year, even lower than the month we switched domains."</div></div>
@@ -216,7 +303,11 @@
     <p style="margin-top:10px"><strong>How firm Google's numbers are.</strong> Calls, website clicks and direction requests are counts of taps and are the firmer numbers. Views are softer: Search Engine Roundtable reported a drop in Search views across many profiles in late June 2025 that a volunteer Google Product Expert called "a known glitch" (<a href="https://www.seroundtable.com/google-local-drops-39744.html">July 11, 2025</a>), and September 2026 data was missing until September 11 (<a href="https://www.seroundtable.com/google-business-profiles-insights-missing-42033.html">September 8, 2026</a>). Read the views chart for its direction, and the calls for their count.</p>
   </div>
 
-  <h2 class="sec">What a Cape Coral searcher sees on Google today</h2>
+  </details>
+
+  <details class="ev">
+    <summary>What a Cape Coral searcher sees on Google today</summary>
+  <h2 class="sec ev-h">What a Cape Coral searcher sees on Google today</h2>
   <div class="prose">
     <p>The regular Google results page for a dental search looks different than it did a year ago. We ran the searches below on September 29, 2026 from a browser located in Cape Coral, on a phone and on a desktop, and captured the full page. Notes on each capture mark what sits above the map listings, how far down the page the map listings start, and whether the free map listings show a call button at all.</p>
   </div>
@@ -260,7 +351,11 @@
     <p style="margin-top:10px"><strong>How to read these.</strong> The browser's location was set at the office, and a single search is a snapshot. These captures are here to show how the page is laid out: what a searcher has to pass before reaching the profile, and what they can tap when they get there.</p>
   </div>
 
-  <h2 class="sec">What changed on Google's side</h2>
+  </details>
+
+  <details class="ev">
+    <summary>What changed on Google's side, and how our other practices did</summary>
+  <h2 class="sec ev-h">What changed on Google's side</h2>
   <div class="prose">
     <p>Two research groups that track Google's local results have documented changes to the results page over this period. They are context for the numbers, not an explanation that lets anyone off the hook. The passages below are highlighted on the source pages so they can be checked.</p>
   </div>
@@ -313,7 +408,11 @@
     <p style="margin-top:10px">Two things follow. The trend is real, but a third of our practices grew their profile calls through it, each in a different local market, so this should never be framed as "it looks bad, but it is bad for everyone." And Kari Mann's drop is larger than the typical one, so the trend explains part of it, not all of it. The goal is to move this practice into the group that is growing.</p>
   </div>
 
-  <h2 class="sec">Implant searches: when they fell, and where they are now</h2>
+  </details>
+
+  <details class="ev">
+    <summary>Implant searches, month by month</summary>
+  <h2 class="sec ev-h">Implant searches: when they fell, and where they are now</h2>
   <div class="prose">
     <p>Google also reports which searches caused the profile to be shown, month by month. Kari's goal is more implant and All-on-X patients, so this is the part of the profile data that matters most to her. Searches for the practice by name are left out of the chart, because the profile's name itself contains the words "dental implants".</p>
   </div>
@@ -330,45 +429,11 @@
     <p><strong>A correction to how this usually gets summarized.</strong> Adding up January to August makes 2025 look far stronger than it was, because more than half of that total came from May 2025 alone. The month-by-month view is the fair one.</p>
   </div>
 
-  <h2 class="sec">The profile itself</h2>
-  <div class="prose">
-    <p>We went through the profile's settings. It is well built: nine categories including Dental implants provider, 23 listed services each with its own description, complete hours, and a 5.0 rating across 895 reviews. The services already include dental implants, implant-supported dentures, All-on-Four, TeethXPress, gum grafting and bone grafting.</p>
-  </div>
-  <div class="status">
-    <div class="col">
-      <div class="head"><span class="dot" style="background:#047857"></span><span style="color:#047857">Done</span></div>
-      <ul>
-        <li><b>Profile website and services links updated,</b> with a tag that lets us count visits from the profile separately from other Google visits.<span class="when">Sep 29</span></li>
-        <li><b>Business Profile listings reviewed</b> and new photos added.<span class="when">September</span></li>
-      </ul>
-    </div>
-    <div class="col">
-      <div class="head"><span class="dot" style="background:#0369a1"></span><span style="color:#0369a1">Next</span></div>
-      <ul>
-        <li><b>The priority services still missing from the profile get added:</b> All-on-X by that name, full mouth dental implants, zirconia fixed bridges, full mouth reconstruction and emergency dentistry. The descriptions are written and ready to enter.</li>
-        <li><b>Full September profile numbers</b> reported once Google finalizes the month, mid-October.</li>
-        <li><b>The same five profile numbers every month:</b> calls, website clicks, direction requests, views on Search and on Maps, and implant searches that showed the profile.</li>
-      </ul>
-    </div>
-  </div>
+  </details>
 
-  <h2 class="sec">My recommendation: give the priority services their own section on the homepage</h2>
-  <div class="prose">
-    <p><strong>The ask.</strong> Sophia, I would like you to request this from the dev and design team: a section on the homepage where each of Kari's priority services gets its own block, with the service name, a short description of two or three sentences, and a link to that service's page.</p>
-    <p><strong>Why it matters.</strong> The homepage is one of the main pages the Google profile sends people to directly. The Website button on the profile opens the homepage, and 131, 156 and 177 people tapped it in June, July and August. For those visitors the homepage is the first thing they see of the practice after the profile. It is also the page Google reads when it decides what the profile is about. Sterling Sky's testing on that point: "The content on the specific URL you link to is important and impacts ranking in the local results."</p>
-    <p><strong>What is there now.</strong> The homepage's main heading is "Family &amp; Cosmetic Dentist in Cape Coral, FL". The only section that touches on services is the one below, called "Smiles": one paragraph and three buttons. Outside the menu, the words "dental implants" do not appear anywhere in the homepage's text. All-on-X appears three times: in Dr. Mann's title, in one sentence, and on a button. Emergency care, sedation and veneers are not mentioned at all. In my opinion that is not sufficient for a practice whose goal is more implant and All-on-X patients.</p>
-  </div>
-  <figure style="max-width:720px">
-    <div class="fig-title">The only services section on the homepage today</div>
-    <div class="fig-sub">karimanndentalstudio.com, September 29, 2026. The patient photos beside it are left out here.</div>
-    <div class="shot-img"><img src="img/kari-mann-gbp/homepage-smiles-section.jpg" alt="The Smiles section of the homepage: one paragraph about the practice's services and three buttons labeled Services, All-on-X and Same Day Crowns"></div>
-  </figure>
-  <div class="prose">
-    <p><strong>Which services.</strong> Confirm the list with Kari, since she knows which services she wants to grow. From what she has told us, the starting list is dental implants, All-on-X and full mouth implants, and implant-supported dentures, plus the general dentistry services she wants to keep building so that side does not fall behind.</p>
-    <p><strong>How we will know it helped.</strong> In the same profile numbers as everything else on this page: implant searches that showed the profile, and calls and website clicks from the profile, month by month. No promise on timing.</p>
-  </div>
-
-  <h2 class="sec">How I would think about it</h2>
+  <details class="ev">
+    <summary>How I would think about it</summary>
+  <h2 class="sec ev-h">How I would think about it</h2>
   <div class="prose">
     <p><strong>Two different things are being called "the decline", and they need to stay separate.</strong> The first is how often the profile is shown on the regular Google results page. That fell in November 2025, and we can show what changed on Google's results page that same month. The second is calls from the profile, which held until April and have been lower since May. We can describe that one accurately, but we cannot yet say what caused it. If the two get blended on the call, the part we can document ends up sounding like an excuse for the part we can't.</p>
     <p><strong>The profile is one door into the practice, not the whole building.</strong> Kari's own scoreboard is points of contact: the phone rings, or someone requests an appointment. Profile interactions are one source feeding that number. They are worth watching, but a change in this one source is not the same thing as a change in her total. Her tracking sheet is the right scoreboard, and this is one line on it.</p>
@@ -378,32 +443,10 @@
     <p><strong>What we do not know yet.</strong> Why calls from the profile stepped down in May. We can describe it exactly, and we will keep reporting it monthly, but we should not offer a cause we cannot support.</p>
   </div>
 
-  <h2 class="sec">On the call: what I would say, and what I would avoid</h2>
-  <div class="status">
-    <div class="col">
-      <div class="head"><span class="dot" style="background:#047857"></span><span style="color:#047857">Say</span></div>
-      <ul>
-        <li><b>September is not finished.</b> Google's data ends on the 25th. At this pace the month lands near 320, level with February and June. We will bring the full month in mid-October.</li>
-        <li><b>The drop in views started in November 2025,</b> before we began and before the new site, and it matches the month paid listings started appearing inside the map results.</li>
-        <li><b>Calls from the profile have been lower since May.</b> We are measuring that, not guessing at it.</li>
-        <li><b>Implant searches are showing the profile again.</b> They faded in November 2025, and July 2026 was the strongest month on record outside one spike.</li>
-        <li><b>We will report the same five profile numbers every month,</b> so the trend she is tracking is measured the same way each time.</li>
-        <li><b>We are giving her priority services their own section on the homepage,</b> because that is the page her Google profile sends people to. Say this once dev and design have confirmed it.</li>
-      </ul>
-    </div>
-    <div class="col">
-      <div class="head"><span class="dot" style="background:#be123c"></span><span style="color:#be123c">Avoid</span></div>
-      <ul>
-        <li><b>Arguing that her 261 is wrong.</b> It is real. It is partial, and it is one source.</li>
-        <li><b>Promising a date or a number of calls.</b></li>
-        <li><b>Naming a cause for the May change in calls.</b> We do not have one we can support.</li>
-        <li><b>"It is bad for everyone."</b> A third of our practices grew their profile calls this year.</li>
-        <li><b>Using any single search as proof,</b> hers or ours, in either direction.</li>
-        <li><b>"We will optimize the profile."</b> It is already built out. Say specifically what is being added.</li>
-      </ul>
-    </div>
-  </div>
+  </details>
 
+  <details class="ev">
+    <summary>How this was measured</summary>
   <div class="method">
     <div class="h">How this was measured</div>
     <div class="src-row"><span class="dot" style="background:#0369a1"></span><span><b>Other S8E8 clients:</b> calls from the Google profile, June to August 2025 against June to August 2026, for the 38 single-location clients with a full record for both periods and at least 60 calls in summer 2025. Same Google source as this profile.</span></div>
@@ -412,6 +455,8 @@
     <div class="src-row"><span class="dot" style="background:#7c3aed"></span><span><b>Changes to local results</b> from Sterling Sky, Whitespark and Search Engine Roundtable, each linked in the table. General updates from Google's Search Status Dashboard. Every quoted sentence was checked on its source page on September 29, 2026.</span></div>
     <div class="src-row"><span class="dot" style="background:#a8a29e"></span><span><b>Research cited:</b> Sterling Sky (Joy Hawkins), "The State of Local SEO in 2026"; Whitespark, "17 Local Developments You Need to Know About from Q4 2025"; Search Engine Roundtable; Smallbiz Edge, "The State of Google Map Pack Call Buttons"; Google Ads Help, "About Local Ads".</span></div>
   </div>
+
+  </details>
 
   <div class="footer">
     <p>Produced by Studio Eighty Eight's SEO Team</p>
