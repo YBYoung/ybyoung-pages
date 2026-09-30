@@ -134,6 +134,9 @@
   body.editing [contenteditable="true"] { outline: 1px dashed #c4b5fd; outline-offset: 2px; border-radius: 2px; }
   body.editing [contenteditable="true"]:hover { background: #f5f3ff; }
   body.editing [contenteditable="true"]:focus { outline: 2px solid #7c3aed; background: #fff; }
+  img.pasted { display: block; max-width: 100%; height: auto; margin: 10px 0; border: 1px solid #e7e5e4; border-radius: 6px; }
+  body.editing img.pasted { cursor: pointer; }
+  body.editing img.pasted:focus, body.editing img.pasted.sel { outline: 2px solid #29ABE2; }
   .editbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; display: flex; align-items: center; gap: 14px; padding: 12px 20px; background: #0d0d0d; color: #fff; font-size: 13px; }
   .editbar b { font-weight: 600; }
   .editbar span { color: #d6d3d1; }
@@ -658,12 +661,50 @@
 
   const bar = document.createElement('div');
   bar.className = 'editbar';
-  bar.innerHTML = '<b>Editing</b><span class="msg">Click any text to change it. When you are done, click Download and send the file to Claude.</span><button type="button" class="dl">Download</button>';
+  bar.innerHTML = '<b>Editing</b><span class="msg">Click any text to change it. Paste a screenshot to add it where the cursor is. When you are done, click Download and send the file to Claude.</span><button type="button" class="dl">Download</button>';
   document.body.appendChild(bar);
   const msg = bar.querySelector('.msg');
 
   let dirty = false;
   document.addEventListener('input', () => { dirty = true; });
+  // Paste: screenshots go in as images at the cursor (shrunk to page width); text goes in as plain text.
+  function shrink(file) {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.onload = () => {
+        const max = 1440, scale = Math.min(1, max / img.width);
+        const c = document.createElement('canvas');
+        c.width = Math.round(img.width * scale); c.height = Math.round(img.height * scale);
+        c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+        resolve(c.toDataURL('image/jpeg', 0.85));
+        URL.revokeObjectURL(img.src);
+      };
+      img.src = URL.createObjectURL(file);
+    });
+  }
+  function insertNode(node) {
+    const sel = window.getSelection();
+    if (!sel.rangeCount) return;
+    const r = sel.getRangeAt(0); r.deleteContents(); r.insertNode(node);
+    r.setStartAfter(node); r.collapse(true); sel.removeAllRanges(); sel.addRange(r);
+  }
+  document.addEventListener('paste', async (e) => {
+    if (!e.target.closest || !e.target.closest('[contenteditable="true"]')) return;
+    const items = Array.from((e.clipboardData || {}).items || []);
+    const imgItem = items.find((it) => it.type && it.type.startsWith('image/'));
+    e.preventDefault();
+    if (imgItem) {
+      const el = document.createElement('img');
+      el.className = 'pasted'; el.alt = 'Screenshot';
+      el.src = await shrink(imgItem.getAsFile());
+      insertNode(el);
+    } else {
+      const text = e.clipboardData.getData('text/plain');
+      if (text) insertNode(document.createTextNode(text));
+    }
+    dirty = true;
+  });
+
   window.addEventListener('beforeunload', (e) => { if (dirty) { e.preventDefault(); e.returnValue = ''; } });
 
   bar.querySelector('.dl').addEventListener('click', () => {
