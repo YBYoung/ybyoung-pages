@@ -646,86 +646,39 @@
 </script>
 <script>
 // Edit mode. Open the page with ?edit=1 (or the "Edit this page" link in the footer), click any text to change it,
-// then Save. Save writes the page straight to the YBYoung/ybyoung-pages repo through the GitHub API;
-// GitHub Pages republishes in about a minute. The GitHub token is kept only in this browser.
+// then Download and send the file to Claude, who publishes it.
 (function () {
-  const REPO = 'YBYoung/ybyoung-pages', BRANCH = 'main';
-  const PATH = location.pathname.split('/').pop() || 'index.html';
-  const TOKEN_KEY = 'ybyoung-pages-token';
   if (!/[?&]edit=1/.test(location.search)) return;
+  const PATH = location.pathname.split('/').pop() || 'index.html';
   const EDITABLE = '.container h1, .container h2, .container h3, .container p, .container figcaption, .container li, .container .fig-title, .container .fig-sub, .container .lbl, .container .val, .container .note, .container .said > div, .container th, .container td, .container .quote, .container .legend span, .container .src-row > span:last-child, .container .footer p, header .client';
   const GENERATED = '.chart, #table-interactions, #table-rate, #table-implant';
   document.body.classList.add('editing');
   document.querySelectorAll(EDITABLE).forEach((el) => { if (!el.closest(GENERATED) && !el.closest('summary')) el.setAttribute('contenteditable', 'true'); });
   document.querySelectorAll('details.ev').forEach((d) => { d.open = true; });
 
-  const getToken = () => { try { return localStorage.getItem(TOKEN_KEY) || ''; } catch (e) { return ''; } };
   const bar = document.createElement('div');
   bar.className = 'editbar';
-  bar.innerHTML = '<b>Editing</b><span class="msg">Click any text to change it. All sections are opened so you can edit them.</span>' +
-    '<input type="password" class="tok" placeholder="GitHub token (one time)" autocomplete="off">' +
-    '<button type="button" class="save">Save</button><button type="button" class="dl ghost">Download copy</button><button type="button" class="swap ghost">Change token</button>';
+  bar.innerHTML = '<b>Editing</b><span class="msg">Click any text to change it. When you are done, click Download and send the file to Claude.</span><button type="button" class="dl">Download</button>';
   document.body.appendChild(bar);
-  const msg = bar.querySelector('.msg'), tok = bar.querySelector('.tok');
-  if (getToken()) tok.hidden = true;
+  const msg = bar.querySelector('.msg');
 
-  function pageHtml() {
+  let dirty = false;
+  document.addEventListener('input', () => { dirty = true; });
+  window.addEventListener('beforeunload', (e) => { if (dirty) { e.preventDefault(); e.returnValue = ''; } });
+
+  bar.querySelector('.dl').addEventListener('click', () => {
     const clone = document.documentElement.cloneNode(true);
     clone.querySelector('body').classList.remove('editing');
     clone.querySelectorAll('[contenteditable]').forEach((el) => el.removeAttribute('contenteditable'));
     clone.querySelectorAll('.editbar').forEach((el) => el.remove());
     clone.querySelectorAll(GENERATED).forEach((el) => { el.innerHTML = ''; });
     clone.querySelectorAll('details.ev').forEach((d) => d.removeAttribute('open'));
-    return '<!DOCTYPE html>\n' + clone.outerHTML + '\n';
-  }
-  function b64(str) {
-    const bytes = new TextEncoder().encode(str); let bin = '';
-    for (let i = 0; i < bytes.length; i += 0x8000) bin += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
-    return btoa(bin);
-  }
-  let dirty = false;
-  document.addEventListener('input', () => { dirty = true; msg.textContent = 'Unsaved changes.'; });
-  window.addEventListener('beforeunload', (e) => { if (dirty) { e.preventDefault(); e.returnValue = ''; } });
-
-  bar.querySelector('.save').addEventListener('click', async () => {
-    let token = getToken();
-    if (!token) {
-      token = tok.value.trim();
-      if (!token) { msg.textContent = 'Paste your GitHub token first (only needed once on this browser).'; tok.focus(); return; }
-    }
-    const api = 'https://api.github.com/repos/' + REPO + '/contents/' + PATH;
-    const headers = { Authorization: 'Bearer ' + token, Accept: 'application/vnd.github+json' };
-    msg.textContent = 'Saving...';
-    try {
-      const cur = await fetch(api + '?ref=' + BRANCH + '&t=' + Date.now(), { headers, cache: 'no-store' });
-      if (cur.status === 401) throw new Error('GitHub rejected this token (expired, mistyped, or revoked). Paste a new one.');
-      if (!cur.ok) throw new Error('Could not read the page from GitHub (' + cur.status + ').');
-      const sha = (await cur.json()).sha;
-      const put = await fetch(api, { method: 'PUT', headers, body: JSON.stringify({ message: 'Edit ' + PATH + ' from the page', content: b64(pageHtml()), sha, branch: BRANCH }) });
-      if (put.status === 409) throw new Error('The page changed on GitHub since it loaded. Download a copy, reload, and paste your edits back in.');
-      if (put.status === 401) throw new Error('GitHub rejected this token (expired, mistyped, or revoked). Paste a new one.');
-      if (put.status === 403 || put.status === 404) throw new Error('This token cannot write to ' + REPO + '. On GitHub, edit the token: Repository access must include ybyoung-pages, and Contents must be Read and write.');
-      if (!put.ok) { let d = ''; try { d = (await put.json()).message || ''; } catch (e) {} throw new Error('Save failed (' + put.status + ') ' + d); }
-      try { localStorage.setItem(TOKEN_KEY, token); } catch (e) {}
-      tok.hidden = true; dirty = false;
-      msg.textContent = 'Saved. The live page updates in about a minute.';
-    } catch (err) {
-      msg.textContent = err.message;
-      if (/token/.test(err.message)) { try { localStorage.removeItem(TOKEN_KEY); } catch (e) {} tok.hidden = false; tok.value = ''; }
-    }
-  });
-
-  bar.querySelector('.swap').addEventListener('click', () => {
-    try { localStorage.removeItem(TOKEN_KEY); } catch (e) {}
-    tok.hidden = false; tok.value = ''; tok.focus();
-    msg.textContent = 'Paste the new token, then Save.';
-  });
-
-  bar.querySelector('.dl').addEventListener('click', () => {
     const a = document.createElement('a');
-    a.href = URL.createObjectURL(new Blob([pageHtml()], { type: 'text/html' }));
+    a.href = URL.createObjectURL(new Blob(['<!DOCTYPE html>\n' + clone.outerHTML + '\n'], { type: 'text/html' }));
     a.download = PATH;
     document.body.appendChild(a); a.click(); a.remove();
+    dirty = false;
+    msg.textContent = 'Downloaded. Send the file to Claude to publish it.';
   });
 })();
 </script>
