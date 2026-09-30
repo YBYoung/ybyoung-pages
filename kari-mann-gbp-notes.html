@@ -664,7 +664,7 @@
   bar.className = 'editbar';
   bar.innerHTML = '<b>Editing</b><span class="msg">Click any text to change it. All sections are opened so you can edit them.</span>' +
     '<input type="password" class="tok" placeholder="GitHub token (one time)" autocomplete="off">' +
-    '<button type="button" class="save">Save</button><button type="button" class="dl ghost">Download copy</button>';
+    '<button type="button" class="save">Save</button><button type="button" class="dl ghost">Download copy</button><button type="button" class="swap ghost">Change token</button>';
   document.body.appendChild(bar);
   const msg = bar.querySelector('.msg'), tok = bar.querySelector('.tok');
   if (getToken()) tok.hidden = true;
@@ -698,16 +698,27 @@
     msg.textContent = 'Saving...';
     try {
       const cur = await fetch(api + '?ref=' + BRANCH + '&t=' + Date.now(), { headers, cache: 'no-store' });
-      if (cur.status === 401 || cur.status === 403) throw new Error('GitHub did not accept the token. Check it has write access to ' + REPO + '.');
-      if (!cur.ok) throw new Error('Could not reach GitHub (' + cur.status + ').');
+      if (cur.status === 401) throw new Error('GitHub rejected this token (expired, mistyped, or revoked). Paste a new one.');
+      if (!cur.ok) throw new Error('Could not read the page from GitHub (' + cur.status + ').');
       const sha = (await cur.json()).sha;
       const put = await fetch(api, { method: 'PUT', headers, body: JSON.stringify({ message: 'Edit ' + PATH + ' from the page', content: b64(pageHtml()), sha, branch: BRANCH }) });
-      if (put.status === 409 || put.status === 422) throw new Error('The page changed on GitHub since it loaded. Download a copy, reload, and paste your edits back in.');
-      if (!put.ok) throw new Error('Save failed (' + put.status + ').');
+      if (put.status === 409) throw new Error('The page changed on GitHub since it loaded. Download a copy, reload, and paste your edits back in.');
+      if (put.status === 401) throw new Error('GitHub rejected this token (expired, mistyped, or revoked). Paste a new one.');
+      if (put.status === 403 || put.status === 404) throw new Error('This token cannot write to ' + REPO + '. On GitHub, edit the token: Repository access must include ybyoung-pages, and Contents must be Read and write.');
+      if (!put.ok) { let d = ''; try { d = (await put.json()).message || ''; } catch (e) {} throw new Error('Save failed (' + put.status + ') ' + d); }
       try { localStorage.setItem(TOKEN_KEY, token); } catch (e) {}
       tok.hidden = true; dirty = false;
       msg.textContent = 'Saved. The live page updates in about a minute.';
-    } catch (err) { msg.textContent = err.message; }
+    } catch (err) {
+      msg.textContent = err.message;
+      if (/token/.test(err.message)) { try { localStorage.removeItem(TOKEN_KEY); } catch (e) {} tok.hidden = false; tok.value = ''; }
+    }
+  });
+
+  bar.querySelector('.swap').addEventListener('click', () => {
+    try { localStorage.removeItem(TOKEN_KEY); } catch (e) {}
+    tok.hidden = false; tok.value = ''; tok.focus();
+    msg.textContent = 'Paste the new token, then Save.';
   });
 
   bar.querySelector('.dl').addEventListener('click', () => {
